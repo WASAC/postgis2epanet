@@ -1,3 +1,5 @@
 /.idea
 /venv
+/__pycache__
 /epanet/__pycache__
+/util/__pycache__

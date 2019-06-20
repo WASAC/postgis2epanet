@@ -1,14 +1,7 @@
-import os
-import datetime
 import argparse
-from database import Database
-from district import Districts
-from epanet.coordinates import Coordinates
-from epanet.pipes import Pipes
-from epanet.reservoirs import Reservoirs
-from epanet.tanks import Tanks
-from epanet.pumps import Pumps
-from epanet.options import Options
+from epanet.tasks import Tasks
+from util.taskmanager import TaskManager
+import atexit
 
 
 def create_argument_parser():
@@ -16,8 +9,8 @@ def create_argument_parser():
      Create the parameters for the script
     """
     parser = argparse.ArgumentParser(
-        description="Create a QField datasets from PostGIS database.",
-        epilog="Example usage: python postgis2qfield.py -d yourdatabase -H localhost - p 5432 "
+        description="Create EPANET INP file each WSS/District from PostGIS database.",
+        epilog="Example usage: python postgis2epanet.py -d yourdatabase -H localhost - p 5432 "
                "-u user -w securePassword -l list_of_distID(seperated by comma)"
     )
     parser.add_argument("-d", "--database", dest="database",
@@ -50,36 +43,8 @@ def create_argument_parser():
 
 if __name__ == "__main__":
     args = create_argument_parser()
-    db = Database(args)
-    districts_obj = Districts(args.dist_id)
-    districts = districts_obj.get_wss_list_each_district(db)
-    main_dir = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + "_epanet_data"
-    for dist in districts:
-        export_dir = "{0}/{1}".format(main_dir, dist.dist_id)
-        os.makedirs(export_dir, exist_ok=True)
-        for wss_id in dist.wss_id_list.split(","):
-            with open("{0}/{1}.inp".format(export_dir, wss_id), 'a') as f:
-                coords = Coordinates(wss_id)
-                coords.get_data(db)
-
-                reservoirs = Reservoirs(wss_id, coords)
-                reservoirs.get_data(db)
-
-                tanks = Tanks(wss_id, coords)
-                tanks.get_data(db)
-
-                pipes = Pipes(wss_id, coords)
-                pipes.get_data(db)
-
-                pumps = Pumps(wss_id, coords, pipes.pipes)
-                pumps.get_data(db)
-
-                options = Options()
-
-                coords.export_junctions(f)
-                reservoirs.export(f)
-                tanks.export(f)
-                pipes.export(f)
-                pumps.export(f)
-                options.export(f)
-                coords.export_coordinates(f)
+    t = Tasks(args)
+    tasks = t.get_tasks()
+    tm = TaskManager(tasks)
+    tm.start()
+    atexit.register(t.archive)

@@ -4,7 +4,7 @@ from epanet.coordinates import Coordinates
 class Reservoirs(object):
     class Reservoir(object):
         def __init__(self, id, elevation, srctype, lon, lat):
-            self.id = "{0}-{1}".format(srctype, str(id))
+            self.id = "{0}-{1}".format(srctype, str(id)).replace(" ", "-")
             self.elevation = elevation or 0
             self.pattern = ""
             self.lon = round(lon, 6)

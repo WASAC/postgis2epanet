@@ -6,18 +6,20 @@ A simple tool for exporting from a PostGIS table to EPANET INP file (You can fin
 [Python 3.6+](http://www.python.org/download/), 
 [psycopg2](http://initd.org/psycopg/download/), 
 [Shapely](https://github.com/Toblerity/Shapely), 
+[light-progress](https://pypi.org/project/light-progress/),
 are already installed and in your ````PATH````.
 
 The following is example of installation procedures by pip installation.
 ````
 pip install psycopg2
 pip install Shapely-1.6.4.post1-cp37-cp37m-win_amd64.whl
+pip install light-progress
 ````
 Shapely can be downloaded from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/). You can chose the file depends on your platform(32bit or 64bit, Python version, etc).
 
 The tool was designed for RWSS department of WASAC in Rwanda.
 
-####Example usage:
+###Example usage:
 
 To export ````water pipeline network````from database ````rwss_assets```` as user ````user```` to EPANET INP fila(.inp) for each WSS and Districts:
 
