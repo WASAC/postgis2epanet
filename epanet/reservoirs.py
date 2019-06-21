@@ -13,17 +13,17 @@ class Reservoirs(object):
         @staticmethod
         def create_header(f):
             f.writelines("[RESERVOIRS]\n")
-            f.writelines(";{0}{1}{2}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Head\t".expandtabs(10),
-                                 "Pattern\t".expandtabs(10)
+            f.writelines(";{0}\t{1}\t{2}\n"
+                         .format("ID\t".expandtabs(16),
+                                 "Head\t".expandtabs(12),
+                                 "Pattern\t".expandtabs(16)
                                  ))
 
         def add(self, f):
-            f.writelines("{0}{1}{2}\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.elevation)).expandtabs(10),
-                                 "{0}\t".format(str(self.pattern)).expandtabs(10)
+            f.writelines(" {0}\t{1}\t{2}\t;\n"
+                         .format("{0}\t".format(self.id).expandtabs(16),
+                                 "{0}\t".format(str(self.elevation)).expandtabs(12),
+                                 "{0}\t".format(str(self.pattern)).expandtabs(16)
                                  ))
 
     def __init__(self, wss_id, coords):

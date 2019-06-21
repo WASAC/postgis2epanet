@@ -9,25 +9,34 @@ class Tanks(object):
             self.capacity = capacity or 0
             self.lon = round(lon, 6)
             self.lat = round(lat, 6)
+            self.diameter = 50
+            self.min_vol = 0
+            self.vol_curve = ""
 
         @staticmethod
         def create_header(f):
             f.writelines("[TANKS]\n")
-            f.writelines(";{0}{1}{2}{3}{4}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Elevation\t".expandtabs(10),
-                                 "InitLevel\t".expandtabs(10),
-                                 "MinLevel\t".expandtabs(10),
-                                 "MaxLevel\t".expandtabs(10)
+            f.writelines(";{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\n"
+                         .format("ID\t".expandtabs(16),
+                                 "Elevation\t".expandtabs(12),
+                                 "InitLevel\t".expandtabs(12),
+                                 "MinLevel\t".expandtabs(12),
+                                 "MaxLevel\t".expandtabs(12),
+                                 "Diameter\t".expandtabs(12),
+                                 "MinVol\t".expandtabs(12),
+                                 "VolCurve"
                                  ))
 
         def add(self, f):
-            f.writelines("{0}{1}{2}{3}{4}\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.elevation)).expandtabs(10),
-                                 "{0}\t".format(str(self.capacity * 0.5)).expandtabs(10),
-                                 "{0}\t".format(str(self.capacity * 0.1)).expandtabs(10),
-                                 "{0}\t".format(str(self.capacity)).expandtabs(10)
+            f.writelines(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t;\n"
+                         .format("{0}\t".format(self.id).expandtabs(16),
+                                 "{0}\t".format(str(self.elevation)).expandtabs(12),
+                                 "{0}\t".format(str(self.capacity * 0.5)).expandtabs(12),
+                                 "{0}\t".format(str(self.capacity * 0.1)).expandtabs(12),
+                                 "{0}\t".format(str(self.capacity)).expandtabs(12),
+                                 "{0}\t".format(str(self.diameter)).expandtabs(12),
+                                 "{0}\t".format(str(self.min_vol)).expandtabs(12),
+                                 "{0}\t".format(str(self.vol_curve)).expandtabs(16)
                                  ))
 
     def __init__(self, wss_id, coords):

@@ -11,3 +11,18 @@ class Common(object):
     def end(self, f):
         f.writelines("[END]")
         f.writelines("\n")
+
+    def export_tags(self, f):
+        tmp = "./templates/tags_template.inp"
+        with open(tmp, 'r') as tmp:
+            for line in tmp:
+                f.writelines(line)
+        f.writelines("\n")
+
+    def export_options(self, f):
+        tmp = "./templates/options_template.inp"
+        with open(tmp, 'r') as tmp:
+            for line in tmp:
+                f.writelines(line)
+        f.writelines("\n")
+        f.writelines("\n")

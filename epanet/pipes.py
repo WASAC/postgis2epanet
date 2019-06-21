@@ -18,26 +18,26 @@ class Pipes(object):
         def create_header(f):
             f.writelines("[PIPES]\n")
             f.writelines(";{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Node1\t".expandtabs(15),
-                                 "Node2\t".expandtabs(15),
-                                 "Length\t".expandtabs(10),
-                                 "Diameter\t".expandtabs(10),
-                                 "Roughness\t".expandtabs(10),
-                                 "MinorLoss\t".expandtabs(10),
-                                 "Status\t".expandtabs(15)
+                         .format("ID\t".expandtabs(16),
+                                 "Node1\t".expandtabs(16),
+                                 "Node2\t".expandtabs(16),
+                                 "Length\t".expandtabs(12),
+                                 "Diameter\t".expandtabs(12),
+                                 "Roughness\t".expandtabs(12),
+                                 "MinorLoss\t".expandtabs(12),
+                                 "Status"
                                  ))
 
         def add(self, f):
-            f.writelines("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.node1)).expandtabs(15),
-                                 "{0}\t".format(str(self.node2)).expandtabs(15),
-                                 "{0}\t".format(str(self.length)).expandtabs(10),
-                                 "{0}\t".format(str(self.diameter)).expandtabs(10),
-                                 "{0}\t".format(str(self.roughness)).expandtabs(10),
-                                 "{0}\t".format(str(self.minorloss)).expandtabs(10),
-                                 "{0}\t".format(self.status).expandtabs(15)
+            f.writelines(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t;\n"
+                         .format("{0}\t".format(self.id).expandtabs(16),
+                                 "{0}\t".format(str(self.node1)).expandtabs(16),
+                                 "{0}\t".format(str(self.node2)).expandtabs(16),
+                                 "{0}\t".format(str(self.length)).expandtabs(12),
+                                 "{0}\t".format(str(self.diameter)).expandtabs(12),
+                                 "{0}\t".format(str(self.roughness)).expandtabs(12),
+                                 "{0}\t".format(str(self.minorloss)).expandtabs(12),
+                                 "{0}\t".format(self.status).expandtabs(6)
                                  ))
 
     def __init__(self, wss_id, coords):

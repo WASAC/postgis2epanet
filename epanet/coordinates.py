@@ -14,31 +14,31 @@ class Coordinates(object):
         def create_header_junction(f):
             f.writelines("[JUNCTIONS]\n")
             f.writelines(";{0}\t{1}\t{2}\t{3}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Elev\t".expandtabs(10),
-                                 "Demand\t".expandtabs(10),
-                                 "Pattern\t".expandtabs(10)))
+                         .format("ID\t".expandtabs(16),
+                                 "Elev\t".expandtabs(12),
+                                 "Demand\t".expandtabs(12),
+                                 "Pattern\t".expandtabs(16)))
 
         def add_junction(self, f):
-            f.writelines("{0}\t{1}\t{2}\t{3}\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(self.altitude).expandtabs(10),
-                                 "{0}\t".format(self.demand).expandtabs(10),
-                                 "{0}\t".format(self.pattern).expandtabs(10)))
+            f.writelines(" {0}\t{1}\t{2}\t{3}\t;\n"
+                         .format("{0}\t".format(self.id).expandtabs(16),
+                                 "{0}\t".format(self.altitude).expandtabs(12),
+                                 "{0}\t".format(self.demand).expandtabs(12),
+                                 "{0}\t".format(self.pattern).expandtabs(16)))
 
         @staticmethod
         def create_header_coordinates(f):
             f.writelines("[COORDINATES]\n")
             f.writelines(";{0}\t{1}\t{2}\n"
-                         .format("Node\t".expandtabs(20),
-                                 "X-Coord\t".expandtabs(10),
-                                 "Y-Coord\t".expandtabs(10)))
+                         .format("Node\t".expandtabs(16),
+                                 "X-Coord\t".expandtabs(16),
+                                 "Y-Coord\t".expandtabs(16)))
 
         def add_coordinate(self, f):
-            f.writelines("{0}\t{1}\t{2}\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(self.lon).expandtabs(10),
-                                 "{0}\t".format(self.lat).expandtabs(10)))
+            f.writelines(" {0}\t{1}\t{2}\n"
+                         .format("{0}\t".format(self.id).expandtabs(16),
+                                 "{0}\t".format(self.lon).expandtabs(16),
+                                 "{0}\t".format(self.lat).expandtabs(16)))
 
     def __init__(self, wss_id):
         self.wss_id = wss_id

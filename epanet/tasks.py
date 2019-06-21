@@ -9,7 +9,6 @@ from epanet.pipes import Pipes
 from epanet.reservoirs import Reservoirs
 from epanet.tanks import Tanks
 from epanet.pumps import Pumps
-from epanet.options import Options
 
 
 class Tasks(object):
@@ -63,7 +62,8 @@ class Tasks(object):
                 tanks.export(f)
                 pipes.export(f)
                 pumps.export(f)
-                options = Options()
-                options.export(f)
+                common.export_tags(f)
+                pumps.export_curve(f)
+                common.export_options(f)
                 coords.export_coordinates(f)
                 common.end(f)

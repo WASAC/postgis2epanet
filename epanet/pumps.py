@@ -16,19 +16,19 @@ class Pumps(object):
         @staticmethod
         def create_header(f):
             f.writelines("[PUMPS]\n")
-            f.writelines(";{0}{1}{2}{3}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Node1\t".expandtabs(15),
-                                 "Node2\t".expandtabs(15),
-                                 "Parameters\t".expandtabs(10)
+            f.writelines(";{0}\t{1}\t{2}\t{3}\n"
+                         .format("ID\t".expandtabs(16),
+                                 "Node1\t".expandtabs(16),
+                                 "Node2\t".expandtabs(16),
+                                 "Parameters\t".expandtabs(12)
                                  ))
 
         def add(self, f):
-            f.writelines("{0}{1}{2}{3}\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.node1)).expandtabs(15),
-                                 "{0}\t".format(str(self.node2)).expandtabs(15),
-                                 "{0}\t".format(str(self.parameter)).expandtabs(10)
+            f.writelines(" {0}\t{1}\t{2}\t{3}\t;\n"
+                         .format("{0}\t".format(self.id).expandtabs(16),
+                                 "{0}\t".format(str(self.node1)).expandtabs(16),
+                                 "{0}\t".format(str(self.node2)).expandtabs(16),
+                                 "{0}\t".format(str(self.parameter)).expandtabs(12)
                                  ))
 
     class PumpCurve(object):
@@ -40,17 +40,17 @@ class Pumps(object):
         @staticmethod
         def create_header(f):
             f.writelines("[CURVES]\n")
-            f.writelines(";{0}{1}{2}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "X-Value\t".expandtabs(15),
-                                 "Y-Value\t".expandtabs(15)
+            f.writelines(";{0}\t{1}\t{2}\n"
+                         .format("ID\t".expandtabs(16),
+                                 "X-Value\t".expandtabs(12),
+                                 "Y-Value\t".expandtabs(12)
                                  ))
 
         def add(self, f):
-            f.writelines("{0}{1}{2}\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.flow)).expandtabs(15),
-                                 "{0}\t".format(str(self.head)).expandtabs(15)
+            f.writelines(" {0}\t{1}\t{2}\t;\n"
+                         .format("{0}\t".format(self.id).expandtabs(16),
+                                 "{0}\t".format(str(self.flow)).expandtabs(12),
+                                 "{0}\t".format(str(self.head)).expandtabs(12)
                                  ))
 
     def __init__(self, wss_id, coords, pipes):
@@ -90,6 +90,7 @@ class Pumps(object):
             p.add(f)
         f.writelines("\n")
 
+    def export_curve(self, f):
         Pumps.PumpCurve.create_header(f)
         for p in self.pumps:
             p.curve.add(f)

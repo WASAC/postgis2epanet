@@ -19,6 +19,7 @@ Shapely can be downloaded from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs
 
 The tool was designed for RWSS department of WASAC in Rwanda.
 
+***
 ###Example usage:
 
 To export ````water pipeline network````from database ````rwss_assets```` as user ````user```` to EPANET INP fila(.inp) for each WSS and Districts:
@@ -34,4 +35,39 @@ If you want to filter only specific dictricts, use ````-l```` parameter to list 
 python postgis2inventoryreport.py -l 51,52,53
 ````
 
-This script was developed by ````Jin IGARASHI, JICA Expert```` from ````The Project for Strengthening Operation and Maintenance of Rural Water Supply Systems in Rwanda- RWASOM````.
+***
+###What shall we do after creating INP file?
+There are 2 options as follow.
+1. Use EPANET application to do analysis. You can directly import INP file to EPANET.
+1. Use QGIS to analyse. But you must use additional plugins for this analysis. 
+    1. Install ````ImportEpanetInpFiles```` plugin to import INP file to QGIS3.
+    1. You can rename column name as following table.
+    1. Install ````QEPANET```` to do analysis. 
+
+Table. Renaming columnname for QEPANET from ImportEpanetInpFiles plugin
+
+|Layer|Old column name|New column name|
+|:---|:---|:---|
+|Junctions|ID|DC_ID|
+|Junctions|Demand1|DEMAND|
+|Junctions|Pattern1|PATTERN|
+|Pipes|ID|DC_ID|
+|Pipes|NodeFrom|NODE1|
+|Pipes|NodeTo|NODE2|
+|Reservoirs|ID|DC_ID|
+|Reservoirs|Pattern1|PATTERN|
+|Tanks|ID|DC_ID|
+|Tanks|InitLevel|INITIALLEV|
+|Tanks|MinLevel|MINIMUMLEV|
+|Tanks|MaxLevel|MAXIMUMLEV|
+|Tanks|MinVolume|MINIMUMVOL|
+|Pumps|ID|DC_ID|
+|Pumps|NodeFrom|Initi|
+|Pumps|NodeTo|NODE2|
+|Valves|ID|DC_ID|
+|Valves|NodeFrom|NODE1|
+|Valves|NodeTo|NODE2|
+
+
+***
+This script was developed by ````Jin IGARASHI, JICA Expert```` from ````The Project for Strengthening Operation and Maintenance of Rural Water Supply Systems in Rwanda (RWASOM)````.
