@@ -6,6 +6,7 @@ A simple tool for exporting from a PostGIS table to EPANET INP file (You can fin
 [Python 3.6+](http://www.python.org/download/), 
 [psycopg2](http://initd.org/psycopg/download/), 
 [Shapely](https://github.com/Toblerity/Shapely), 
+[PyShp](https://github.com/GeospatialPython/pyshp),
 [light-progress](https://pypi.org/project/light-progress/),
 are already installed and in your ````PATH````.
 
@@ -13,6 +14,7 @@ The following is example of installation procedures by pip installation.
 ````
 pip install psycopg2
 pip install Shapely-1.6.4.post1-cp37-cp37m-win_amd64.whl
+pip install pyshp
 pip install light-progress
 ````
 Shapely can be downloaded from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/). You can chose the file depends on your platform(32bit or 64bit, Python version, etc).
@@ -39,7 +41,11 @@ python postgis2inventoryreport.py -l 51,52,53
 ###What shall we do after creating INP file?
 There are 2 options as follow.
 1. Use EPANET application to do analysis. You can directly import INP file to EPANET.
-1. Use QGIS to analyse. But you must use additional plugins for this analysis. 
+1. Use QGIS to analyse by ````QEPANET```` Plugin.
+    1. Import Shapefiles for each WSS to QGIS3.
+    1. Install ````QEPANET```` Plugin on QGIS3.
+    1. Do analysis by ````QEPANET````
+1. Use QGIS to analyse by both ````ImportEpanetInpFiles```` and ````QEPANET```` Plugin.
     1. Install ````ImportEpanetInpFiles```` plugin to import INP file to QGIS3.
     1. You can rename column name as following table.
     1. Install ````QEPANET```` to do analysis. 

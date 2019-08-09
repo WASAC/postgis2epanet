@@ -1,4 +1,5 @@
 from epanet.coordinates import Coordinates
+import shapefile
 
 
 class Reservoirs(object):
@@ -57,3 +58,15 @@ class Reservoirs(object):
         for r in self.reservoirs:
             r.add(f)
         f.writelines("\n")
+
+    def export_shapefile(self, f):
+        if len(self.reservoirs) == 0:
+            return
+        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "reservoirs")) as _shp:
+            _shp.autoBalance = 1
+            _shp.field('dc_id', 'C', 254)
+            _shp.field('head', 'N', 20)
+            for r in self.reservoirs:
+                _shp.point(float(r.lon), float(r.lat))
+                _shp.record(r.id, r.elevation)
+            _shp.close()

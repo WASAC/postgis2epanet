@@ -1,3 +1,6 @@
+import shapefile
+
+
 class Coordinates(object):
     class Coordinate(object):
         def __init__(self, id, lon, lat, altitude, lon_utm, lat_utm):
@@ -45,6 +48,12 @@ class Coordinates(object):
         self.coordMap = {}
         self.epsg = 4326
         self.epsg_utm = 32736
+
+    def get_coord_by_id(self, id):
+        for key in self.coordMap:
+            coord = self.coordMap[key]
+            if id == coord.id:
+                return coord
 
     def get_data(self, db):
         query = " WITH points2d AS "
@@ -94,3 +103,17 @@ class Coordinates(object):
             coord = self.coordMap[key]
             coord.add_coordinate(f)
         f.writelines("\n")
+
+    def export_shapefile(self, f):
+        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "junctions")) as _shp:
+            _shp.autoBalance = 1
+            _shp.field('dc_id', 'C', 254)
+            _shp.field('elevation', 'N', 20)
+            _shp.field('pattern', 'C', 254)
+            _shp.field('demand', 'N', 20, 9)
+            for key in self.coordMap:
+                coord = self.coordMap[key]
+                if "Node" in coord.id:
+                    _shp.point(float(coord.lon), float(coord.lat))
+                    _shp.record(coord.id, coord.altitude, coord.pattern, coord.demand)
+            _shp.close()

@@ -1,3 +1,6 @@
+import shapefile
+
+
 class Pumps(object):
     class Pump(object):
         def __init__(self, id, lon, lat, flow, head):
@@ -95,3 +98,22 @@ class Pumps(object):
         for p in self.pumps:
             p.curve.add(f)
         f.writelines("\n")
+
+    def export_shapefile(self, f):
+        if len(self.pumps) == 0:
+            return
+        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "pumps")) as _shp:
+            _shp.autoBalance = 1
+            _shp.field('dc_id', 'C', 254)
+            _shp.field('node1', 'C', 254)
+            _shp.field('node2', 'C', 254)
+            _shp.field('head', 'C', 254)
+            _shp.field('flow', 'C', 254)
+            _shp.field('power', 'N', 20, 9)
+            _shp.field('curveID', 'C', 254)
+            for p in self.pumps:
+                node1 = self.coords.get_coord_by_id(p.node1)
+                node2 = self.coords.get_coord_by_id(p.node2)
+                _shp.line([[[float(node1.lon), float(node1.lat)], [float(node2.lon), float(node2.lat)]]])
+                _shp.record(p.id, p.node1, p.node2, p.curve.head, p.curve.flow, None, p.curve.id)
+            _shp.close()

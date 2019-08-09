@@ -35,6 +35,7 @@ class Tasks(object):
         def __init__(self, db, district, export_dir, wss_id):
             self.db = db
             self.dist = district
+            self.export_dir = export_dir
             self.export_file = "{0}/{1}.inp".format(export_dir, wss_id)
             self.wss_id = wss_id
 
@@ -67,3 +68,9 @@ class Tasks(object):
                 common.export_options(f)
                 coords.export_coordinates(f)
                 common.end(f)
+
+                coords.export_shapefile(f)
+                pipes.export_shapefile(f)
+                tanks.export_shapefile(f)
+                reservoirs.export_shapefile(f)
+                pumps.export_shapefile(f)

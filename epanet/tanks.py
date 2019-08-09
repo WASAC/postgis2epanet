@@ -1,4 +1,5 @@
 from epanet.coordinates import Coordinates
+import shapefile
 
 
 class Tanks(object):
@@ -70,3 +71,22 @@ class Tanks(object):
         for t in self.tanks:
             t.add(f)
         f.writelines("\n")
+
+    def export_shapefile(self, f):
+        if len(self.tanks) == 0:
+            return
+        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "tanks")) as _shp:
+            _shp.autoBalance = 1
+            _shp.field('dc_id', 'C', 254)
+            _shp.field('elevation', 'N', 20)
+            _shp.field('initiallev', 'N', 20)
+            _shp.field('minimumlev', 'N', 20)
+            _shp.field('maximumlev', 'N', 20)
+            _shp.field('diameter', 'N', 20)
+            _shp.field('minimumvol', 'N', 20)
+            _shp.field('volumecurv', 'N', 20)
+            for t in self.tanks:
+                _shp.point(float(t.lon), float(t.lat))
+                _shp.record(t.id, t.elevation, t.capacity * 0.5, t.capacity * 0.1, t.capacity,
+                            t.diameter, t.min_vol, t.vol_curve)
+            _shp.close()
