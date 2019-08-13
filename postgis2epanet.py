@@ -47,4 +47,4 @@ if __name__ == "__main__":
     tasks = t.get_tasks()
     tm = TaskManager(tasks)
     tm.start()
-    atexit.register(t.archive)
+    atexit.register(t.archive_all)

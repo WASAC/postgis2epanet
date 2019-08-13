@@ -17,19 +17,26 @@ class Tasks(object):
         districts_obj = Districts(args.dist_id)
         self.districts = districts_obj.get_wss_list_each_district(self.db)
         self.main_dir = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + "_epanet_data"
+        self.exportdir_list = []
 
     def get_tasks(self):
         obj_list = []
         for dist in self.districts:
-            export_dir = "{0}/{1}".format(self.main_dir, dist.dist_id)
+            export_dir = "{0}/{1}_{2}".format(self.main_dir, dist.dist_id, dist.district)
+            self.exportdir_list.append(export_dir)
             os.makedirs(export_dir, exist_ok=True)
             for wss_id in dist.wss_id_list.split(","):
                 obj_list.append(Tasks.Task(self.db, dist, export_dir, wss_id))
         return obj_list
 
-    def archive(self):
-        shutil.make_archive(self.main_dir, 'zip', root_dir=self.main_dir)
-        shutil.rmtree(self.main_dir)
+    def archive(self, directory):
+        shutil.make_archive(directory, 'zip', root_dir=directory)
+        shutil.rmtree(directory)
+
+    def archive_all(self):
+        for path in self.exportdir_list:
+            self.archive(path)
+        self.archive(self.main_dir)
 
     class Task(object):
         def __init__(self, db, district, export_dir, wss_id):
