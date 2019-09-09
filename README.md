@@ -22,7 +22,7 @@ Shapely can be downloaded from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs
 The tool was designed for RWSS department of WASAC in Rwanda.
 
 ***
-##Example usage:
+## Example usage:
 
 To export ````water pipeline network````from database ````rwss_assets```` as user ````user```` to EPANET INP file(.inp) and ESRI Shapefiles for each WSS and Districts:
 
@@ -38,7 +38,7 @@ python postgis2epanet.py -l 51,52,53
 ````
 
 ***
-##Result of the Script:
+## Result of the Script:
 
 A ZIP archive file as below will be created through this script.
 ````
@@ -90,7 +90,7 @@ C:.
 ````
 
 ***
-##How can we analyse after creating INP file/Shapefiles?
+## How can we analyse after creating INP file/Shapefiles?
 There are 3 options as follows.
 1. Use EPANET application to do analysis. You can directly import INP file to EPANET.
     <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20EPANET.gif)
