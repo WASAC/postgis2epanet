@@ -34,21 +34,24 @@ python postgis2epanet.py -d yourdatabase -H localhost - p 5432 -u user -w secure
 If you want to filter only specific dictricts, use ````-l```` parameter to list ID of district by comma(,)
 
 ````
-python postgis2inventoryreport.py -l 51,52,53
+python postgis2epanet.py -l 51,52,53
 ````
 
 ***
 ###What shall we do after creating INP file?
-There are 2 options as follow.
+There are 3 options as follows.
 1. Use EPANET application to do analysis. You can directly import INP file to EPANET.
-1. Use QGIS to analyse by ````QEPANET```` Plugin.
+1. Use QGIS to analyse by ````QWater```` Plugin.
     1. Import Shapefiles for each WSS to QGIS3.
-    1. Install ````QEPANET```` Plugin on QGIS3.
-    1. Do analysis by ````QEPANET````
-1. Use QGIS to analyse by both ````ImportEpanetInpFiles```` and ````QEPANET```` Plugin.
+    1. Install ````QWater```` Plugin on QGIS3.
+    1. Do analysis by ````QWater````
+
+![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
+    
+1. Use QGIS to analyse by both ````ImportEpanetInpFiles```` and ````QWater```` Plugin.
     1. Install ````ImportEpanetInpFiles```` plugin to import INP file to QGIS3.
     1. You can rename column name as following table.
-    1. Install ````QEPANET```` to do analysis. 
+    1. Install ````QWater```` to do analysis. 
 
 Table. Renaming columnname for QEPANET from ImportEpanetInpFiles plugin
 
