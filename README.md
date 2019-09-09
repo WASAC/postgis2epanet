@@ -41,13 +41,13 @@ python postgis2epanet.py -l 51,52,53
 ###What shall we do after creating INP file?
 There are 3 options as follows.
 1. Use EPANET application to do analysis. You can directly import INP file to EPANET.
+    1. ![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20EPANET.gif)
 1. Use QGIS to analyse by ````QWater```` Plugin.
+    1. ![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
     1. Import Shapefiles for each WSS to QGIS3.
     1. Install ````QWater```` Plugin on QGIS3.
     1. Do analysis by ````QWater````
 
-![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
-    
 1. Use QGIS to analyse by both ````ImportEpanetInpFiles```` and ````QWater```` Plugin.
     1. Install ````ImportEpanetInpFiles```` plugin to import INP file to QGIS3.
     1. You can rename column name as following table.
