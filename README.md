@@ -22,9 +22,9 @@ Shapely can be downloaded from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs
 The tool was designed for RWSS department of WASAC in Rwanda.
 
 ***
-###Example usage:
+##Example usage:
 
-To export ````water pipeline network````from database ````rwss_assets```` as user ````user```` to EPANET INP fila(.inp) for each WSS and Districts:
+To export ````water pipeline network````from database ````rwss_assets```` as user ````user```` to EPANET INP file(.inp) and ESRI Shapefiles for each WSS and Districts:
 
 Before running the script, kindly check the database settings at command line parameters.
 ````
@@ -38,12 +38,64 @@ python postgis2epanet.py -l 51,52,53
 ````
 
 ***
-###What shall we do after creating INP file?
+##Result of the Script:
+
+A ZIP archive file as below will be created through this script.
+````
+20190813_170355_epanet_data.zip
+````
+
+After extracting ZIP archive, you will find other ZIP archive for each Districts as follows.
+````
+C:.
+    21_Nyanza.zip
+    22_Gisagara.zip
+    23_Nyaruguru.zip
+    24_Huye.zip
+    25_Nyamagabe.zip
+    26_Ruhango.zip
+    27_Muhanga.zip
+    28_Kamonyi.zip
+    (skip)
+````
+
+Let us extract 24_Huye.zip here, you will see the following files as below. 
+Name of file and folder is ID for water supply system. You can use INP file for EPANET, and you can also use Shapefiles for QGIS plugin.
+````
+C:.
+│  2041.inp   <- This INP file is for EPANET application
+│  20410.inp
+│  20411.inp
+│  (skip)
+│  
+├─2041  <- These Shapefiles under WSS_ID folder are for QGIS Plugin.
+│      2041_junctions.dbf
+│      2041_junctions.shp
+│      2041_junctions.shx
+│      2041_pipes.dbf
+│      2041_pipes.shp
+│      2041_pipes.shx
+│      2041_reservoirs.dbf
+│      2041_reservoirs.shp
+│      2041_reservoirs.shx
+│      2041_tanks.dbf
+│      2041_tanks.shp
+│      2041_tanks.shx
+│      
+├─20410
+│      20410_junctions.dbf
+│      20410_junctions.shp
+│      20410_junctions.shx
+│      (skip)
+````
+
+***
+##How can we analyse after creating INP file/Shapefiles?
 There are 3 options as follows.
 1. Use EPANET application to do analysis. You can directly import INP file to EPANET.
-    1. ![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20EPANET.gif)
+    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20EPANET.gif)
 1. Use QGIS to analyse by ````QWater```` Plugin.
-    1. ![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
+    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
     1. Import Shapefiles for each WSS to QGIS3.
     1. Install ````QWater```` Plugin on QGIS3.
     1. Do analysis by ````QWater````
