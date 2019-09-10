@@ -95,11 +95,9 @@ class Pumps(object):
                 for p in self.pipes:
                     if nodeid == p.node1 or nodeid == p.node2:
                         pump.set_node(p.node1, p.node2)
-                        #del_pipe_idx = self.pipes.index(p)
                         del_pipe_idx = p.id
                 if del_pipe_idx != -1:
                     self.del_pipes_id.append(del_pipe_idx)
-                    #del self.pipes[del_pipe_idx]
 
     def export(self, f):
         Pumps.Pump.create_header(f)

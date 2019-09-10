@@ -9,6 +9,7 @@ from epanet.pipes import Pipes
 from epanet.reservoirs import Reservoirs
 from epanet.tanks import Tanks
 from epanet.pumps import Pumps
+from epanet.valves import Valves
 
 
 class Tasks(object):
@@ -63,23 +64,34 @@ class Tasks(object):
                 pumps = Pumps(self.wss_id, coords, pipes.pipes)
                 pumps.get_data(self.db)
 
+                valves = Valves(self.wss_id, coords, pipes.pipes)
+                valves.get_data(self.db)
+
                 common = Common()
                 common.start(f, "{0} WSS in {1} District".format(self.wss_id, self.dist.district))
                 coords.export_junctions(f)
                 reservoirs.export(f)
                 tanks.export(f)
-                del_pipes_id = pumps.get_del_pipes_id_for_inp()
+                #join lists of pipes id which duplicates from pumps and valves.
+                del_pipes_id = []
+                del_pipes_id.extend( pumps.get_del_pipes_id_for_inp())
+                del_pipes_id.extend(valves.get_del_pipes_id_for_inp())
                 pipes.export(f, del_pipes_id)
                 pumps.export(f)
+                valves.export(f)
                 common.export_tags(f)
                 pumps.export_curve(f)
                 common.export_options(f)
                 coords.export_coordinates(f)
                 common.end(f)
 
-                del_coords_id = pumps.get_del_coords_id_for_inp()
+                # join lists of coordinate id which duplicates from pumps and valves.
+                del_coords_id = []
+                del_coords_id.extend(pumps.get_del_coords_id_for_inp())
+                del_coords_id.extend(valves.get_del_coords_id_for_inp())
                 coords.export_shapefile(f, del_coords_id)
                 pipes.export_shapefile(f)
                 tanks.export_shapefile(f)
                 reservoirs.export_shapefile(f)
                 pumps.export_shapefile(f)
+                valves.export_shapefile(f)
