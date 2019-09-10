@@ -66,7 +66,8 @@ class Reservoirs(object):
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
             _shp.field('head', 'N', 20)
+            _shp.field('pattern', 'C', 254)
             for r in self.reservoirs:
                 _shp.point(float(r.lon), float(r.lat))
-                _shp.record(r.id, r.elevation)
+                _shp.record(r.id, r.elevation, '')
             _shp.close()

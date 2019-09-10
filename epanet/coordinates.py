@@ -104,16 +104,19 @@ class Coordinates(object):
             coord.add_coordinate(f)
         f.writelines("\n")
 
-    def export_shapefile(self, f):
+    def export_shapefile(self, f, del_coords_id):
         with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "junctions")) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
             _shp.field('elevation', 'N', 20)
             _shp.field('pattern', 'C', 254)
             _shp.field('demand', 'N', 20, 9)
+            _shp.field('demand_pto', 'N', 20, 9)
             for key in self.coordMap:
                 coord = self.coordMap[key]
                 if "Node" in coord.id:
+                    if coord.id in del_coords_id:
+                        continue
                     _shp.point(float(coord.lon), float(coord.lat))
-                    _shp.record(coord.id, coord.altitude, coord.pattern, coord.demand)
+                    _shp.record(coord.id, coord.altitude, coord.pattern, coord.demand, '')
             _shp.close()

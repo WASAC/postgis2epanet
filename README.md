@@ -97,7 +97,7 @@ There are 3 options as follows.
 1. Use QGIS to analyse by ````QWater```` Plugin.
     <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
     1. Import Shapefiles for each WSS to QGIS3.
-    1. Install ````QWater```` Plugin on QGIS3.
+    1. Install ````QWater```` Plugin on QGIS3. See manual of QWater [here](https://github.com/jorgealmerio/QWater/blob/master/tutorial_en.md).
     1. Do analysis by ````QWater````
 
 1. Use QGIS to analyse by both ````ImportEpanetInpFiles```` and ````QWater```` Plugin.

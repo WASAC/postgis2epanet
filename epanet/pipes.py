@@ -80,10 +80,11 @@ class Pipes(object):
                         pipe = Pipes.Pipe(_id, node1, node2, length, pipe_size)
                         self.pipes.append(pipe)
 
-    def export(self, f):
+    def export(self, f, del_pipes_id):
         Pipes.Pipe.create_header(f)
         for pipe in self.pipes:
-            pipe.add(f)
+            if not pipe.id in del_pipes_id:
+                pipe.add(f)
         f.writelines("\n")
 
     def export_shapefile(self, f):
