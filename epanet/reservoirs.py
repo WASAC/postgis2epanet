@@ -1,8 +1,9 @@
 from epanet.coordinates import Coordinates
 import shapefile
+from epanet.layer_base import LayerBase
 
 
-class Reservoirs(object):
+class Reservoirs(LayerBase):
     class Reservoir(object):
         def __init__(self, id, elevation, srctype, lon, lat):
             self.id = "{0}-{1}".format(srctype, str(id)).replace(" ", "-")
@@ -15,14 +16,14 @@ class Reservoirs(object):
         def create_header(f):
             f.writelines("[RESERVOIRS]\n")
             f.writelines(";{0}\t{1}\t{2}\n"
-                         .format("ID\t".expandtabs(16),
+                         .format("ID\t".expandtabs(20),
                                  "Head\t".expandtabs(12),
                                  "Pattern\t".expandtabs(16)
                                  ))
 
         def add(self, f):
             f.writelines(" {0}\t{1}\t{2}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(16),
+                         .format("{0}\t".format(self.id).expandtabs(20),
                                  "{0}\t".format(str(self.elevation)).expandtabs(12),
                                  "{0}\t".format(str(self.pattern)).expandtabs(16)
                                  ))
@@ -62,7 +63,8 @@ class Reservoirs(object):
     def export_shapefile(self, f):
         if len(self.reservoirs) == 0:
             return
-        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "reservoirs")) as _shp:
+        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "reservoirs")
+        with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
             _shp.field('head', 'N', 20)
@@ -71,3 +73,4 @@ class Reservoirs(object):
                 _shp.point(float(r.lon), float(r.lat))
                 _shp.record(r.id, r.elevation, '')
             _shp.close()
+        self.createProjection(filename)

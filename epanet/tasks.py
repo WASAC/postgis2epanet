@@ -10,6 +10,7 @@ from epanet.reservoirs import Reservoirs
 from epanet.tanks import Tanks
 from epanet.pumps import Pumps
 from epanet.valves import Valves
+from epanet.connections import Connections
 
 
 class Tasks(object):
@@ -51,6 +52,10 @@ class Tasks(object):
             with open(self.export_file, 'a') as f:
                 coords = Coordinates(self.wss_id)
                 coords.get_data(self.db)
+
+                conns = Connections(self.wss_id)
+                conns.get_data(self.db)
+                coords.add_demands(conns.connections)
 
                 reservoirs = Reservoirs(self.wss_id, coords)
                 reservoirs.get_data(self.db)

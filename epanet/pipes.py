@@ -1,9 +1,10 @@
 import json
 from shapely.geometry import LineString
 import shapefile
+from epanet.layer_base import LayerBase
 
 
-class Pipes(object):
+class Pipes(LayerBase):
     class Pipe(object):
         def __init__(self, id, node1, node2, length, diameter):
             self.id = "Pipe-" + id
@@ -19,9 +20,9 @@ class Pipes(object):
         def create_header(f):
             f.writelines("[PIPES]\n")
             f.writelines(";{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\n"
-                         .format("ID\t".expandtabs(16),
-                                 "Node1\t".expandtabs(16),
-                                 "Node2\t".expandtabs(16),
+                         .format("ID\t".expandtabs(20),
+                                 "Node1\t".expandtabs(20),
+                                 "Node2\t".expandtabs(20),
                                  "Length\t".expandtabs(12),
                                  "Diameter\t".expandtabs(12),
                                  "Roughness\t".expandtabs(12),
@@ -31,9 +32,9 @@ class Pipes(object):
 
         def add(self, f):
             f.writelines(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(16),
-                                 "{0}\t".format(str(self.node1)).expandtabs(16),
-                                 "{0}\t".format(str(self.node2)).expandtabs(16),
+                         .format("{0}\t".format(self.id).expandtabs(20),
+                                 "{0}\t".format(str(self.node1)).expandtabs(20),
+                                 "{0}\t".format(str(self.node2)).expandtabs(20),
                                  "{0}\t".format(str(self.length)).expandtabs(12),
                                  "{0}\t".format(str(self.diameter)).expandtabs(12),
                                  "{0}\t".format(str(self.roughness)).expandtabs(12),
@@ -90,7 +91,8 @@ class Pipes(object):
     def export_shapefile(self, f):
         if len(self.pipes) == 0:
             return
-        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "pipes")) as _shp:
+        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "pipes")
+        with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
             _shp.field('node1', 'C', 254)
@@ -106,3 +108,4 @@ class Pipes(object):
                 _shp.line([[[float(node1.lon), float(node1.lat)], [float(node2.lon), float(node2.lat)]]])
                 _shp.record(pipe.id, pipe.node1, pipe.node2, pipe.length, pipe.diameter, pipe.status, pipe.roughness, pipe.minorloss)
             _shp.close()
+        self.createProjection(filename)

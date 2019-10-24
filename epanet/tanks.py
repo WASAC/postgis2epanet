@@ -1,24 +1,26 @@
 from epanet.coordinates import Coordinates
 import shapefile
+from epanet.layer_base import LayerBase
 
 
-class Tanks(object):
+class Tanks(LayerBase):
     class Tank(object):
         def __init__(self, id, elevation, capacity, lon, lat):
             self.id = "Tank-" + str(id)
             self.elevation = elevation or 0
             self.capacity = capacity or 0
+            self.max_level = 1.5
             self.lon = round(lon, 6)
             self.lat = round(lat, 6)
-            self.diameter = 50
-            self.min_vol = 0
+            self.diameter = 5
+            self.min_vol = self.capacity
             self.vol_curve = ""
 
         @staticmethod
         def create_header(f):
             f.writelines("[TANKS]\n")
             f.writelines(";{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\n"
-                         .format("ID\t".expandtabs(16),
+                         .format("ID\t".expandtabs(20),
                                  "Elevation\t".expandtabs(12),
                                  "InitLevel\t".expandtabs(12),
                                  "MinLevel\t".expandtabs(12),
@@ -30,11 +32,11 @@ class Tanks(object):
 
         def add(self, f):
             f.writelines(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(16),
+                         .format("{0}\t".format(self.id).expandtabs(20),
                                  "{0}\t".format(str(self.elevation)).expandtabs(12),
-                                 "{0}\t".format(str(self.capacity * 0.5)).expandtabs(12),
-                                 "{0}\t".format(str(self.capacity * 0.1)).expandtabs(12),
-                                 "{0}\t".format(str(self.capacity)).expandtabs(12),
+                                 "{0}\t".format(str(self.max_level * 0.5)).expandtabs(12),
+                                 "{0}\t".format(str(self.max_level * 0.1)).expandtabs(12),
+                                 "{0}\t".format(str(self.max_level)).expandtabs(12),
                                  "{0}\t".format(str(self.diameter)).expandtabs(12),
                                  "{0}\t".format(str(self.min_vol)).expandtabs(12),
                                  "{0}\t".format(str(self.vol_curve)).expandtabs(16)
@@ -75,7 +77,8 @@ class Tanks(object):
     def export_shapefile(self, f):
         if len(self.tanks) == 0:
             return
-        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "tanks")) as _shp:
+        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "tanks")
+        with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
             _shp.field('elevation', 'N', 20)
@@ -90,3 +93,4 @@ class Tanks(object):
                 _shp.record(t.id, t.elevation, t.capacity * 0.5, t.capacity * 0.1, t.capacity,
                             t.diameter, t.min_vol, t.vol_curve)
             _shp.close()
+        self.createProjection(filename)

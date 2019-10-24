@@ -1,7 +1,8 @@
 import shapefile
+from epanet.layer_base import LayerBase
 
 
-class Coordinates(object):
+class Coordinates(LayerBase):
     class Coordinate(object):
         def __init__(self, id, lon, lat, altitude, lon_utm, lat_utm):
             self.id = id
@@ -10,21 +11,21 @@ class Coordinates(object):
             self.altitude = altitude or 0
             self.lon_utm = round(lon_utm, 3)
             self.lat_utm = round(lat_utm, 3)
-            self.demand = 0
+            self.demand = 0.0
             self.pattern = ""
 
         @staticmethod
         def create_header_junction(f):
             f.writelines("[JUNCTIONS]\n")
             f.writelines(";{0}\t{1}\t{2}\t{3}\n"
-                         .format("ID\t".expandtabs(16),
+                         .format("ID\t".expandtabs(20),
                                  "Elev\t".expandtabs(12),
                                  "Demand\t".expandtabs(12),
                                  "Pattern\t".expandtabs(16)))
 
         def add_junction(self, f):
             f.writelines(" {0}\t{1}\t{2}\t{3}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(16),
+                         .format("{0}\t".format(self.id).expandtabs(20),
                                  "{0}\t".format(self.altitude).expandtabs(12),
                                  "{0}\t".format(self.demand).expandtabs(12),
                                  "{0}\t".format(self.pattern).expandtabs(16)))
@@ -33,13 +34,13 @@ class Coordinates(object):
         def create_header_coordinates(f):
             f.writelines("[COORDINATES]\n")
             f.writelines(";{0}\t{1}\t{2}\n"
-                         .format("Node\t".expandtabs(16),
+                         .format("Node\t".expandtabs(20),
                                  "X-Coord\t".expandtabs(16),
                                  "Y-Coord\t".expandtabs(16)))
 
         def add_coordinate(self, f):
             f.writelines(" {0}\t{1}\t{2}\n"
-                         .format("{0}\t".format(self.id).expandtabs(16),
+                         .format("{0}\t".format(self.id).expandtabs(20),
                                  "{0}\t".format(self.lon).expandtabs(16),
                                  "{0}\t".format(self.lat).expandtabs(16)))
 
@@ -105,7 +106,8 @@ class Coordinates(object):
         f.writelines("\n")
 
     def export_shapefile(self, f, del_coords_id):
-        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "junctions")) as _shp:
+        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "junctions")
+        with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
             _shp.field('elevation', 'N', 20)
@@ -120,3 +122,12 @@ class Coordinates(object):
                     _shp.point(float(coord.lon), float(coord.lat))
                     _shp.record(coord.id, coord.altitude, coord.pattern, coord.demand, '')
             _shp.close()
+        self.createProjection(filename)
+
+    def add_demands(self, connections):
+        for conn in connections:
+            target_key = ",".join([str(conn.lon), str(conn.lat)])
+            for key in self.coordMap:
+                if key == target_key:
+                    self.coordMap[key].id = "{0}({1})".format(self.coordMap[key].id, conn.type).replace(" ","_")
+                    self.coordMap[key].demand = conn.demands

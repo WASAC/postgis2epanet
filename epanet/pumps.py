@@ -1,7 +1,8 @@
 import shapefile
+from epanet.layer_base import LayerBase
 
 
-class Pumps(object):
+class Pumps(LayerBase):
     class Pump(object):
         def __init__(self, id, lon, lat, elevation, flow, head):
             self.id = "Pump-" + str(id)
@@ -21,17 +22,17 @@ class Pumps(object):
         def create_header(f):
             f.writelines("[PUMPS]\n")
             f.writelines(";{0}\t{1}\t{2}\t{3}\n"
-                         .format("ID\t".expandtabs(16),
-                                 "Node1\t".expandtabs(16),
-                                 "Node2\t".expandtabs(16),
+                         .format("ID\t".expandtabs(20),
+                                 "Node1\t".expandtabs(20),
+                                 "Node2\t".expandtabs(20),
                                  "Parameters\t".expandtabs(12)
                                  ))
 
         def add(self, f):
             f.writelines(" {0}\t{1}\t{2}\t{3}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(16),
-                                 "{0}\t".format(str(self.node1)).expandtabs(16),
-                                 "{0}\t".format(str(self.node2)).expandtabs(16),
+                         .format("{0}\t".format(self.id).expandtabs(20),
+                                 "{0}\t".format(str(self.node1)).expandtabs(20),
+                                 "{0}\t".format(str(self.node2)).expandtabs(20),
                                  "{0}\t".format(str(self.parameter)).expandtabs(12)
                                  ))
 
@@ -114,7 +115,8 @@ class Pumps(object):
     def export_shapefile(self, f):
         if len(self.pumps) == 0:
             return
-        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "pumps")) as _shp:
+        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "pumps")
+        with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
             _shp.field('elevation', 'C', 254)
@@ -126,3 +128,4 @@ class Pumps(object):
                 _shp.point(float(p.lon), float(p.lat))
                 _shp.record(p.id, p.elevation, p.curve.head, p.curve.flow, None, "POWER {0}".format(str(1)))
             _shp.close()
+        self.createProjection(filename)

@@ -1,7 +1,8 @@
 import shapefile
+from epanet.layer_base import LayerBase
 
 
-class Valves(object):
+class Valves(LayerBase):
     class Valve(object):
         def __init__(self, id, lon, lat, elevation, diameter, valve_type):
             self.id = "{0}-{1}".format(valve_type, str(id))
@@ -23,7 +24,7 @@ class Valves(object):
         def create_header(f):
             f.writelines("[VALVES]\n")
             f.writelines(";{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\n"
-                         .format("ID\t".expandtabs(16),
+                         .format("ID\t".expandtabs(20),
                                  "Node1\t".expandtabs(16),
                                  "Node2\t".expandtabs(16),
                                  "Diameter\t".expandtabs(12),
@@ -34,9 +35,9 @@ class Valves(object):
 
         def add(self, f):
             f.writelines(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(16),
-                                 "{0}\t".format(str(self.node1)).expandtabs(16),
-                                 "{0}\t".format(str(self.node2)).expandtabs(16),
+                         .format("{0}\t".format(self.id).expandtabs(20),
+                                 "{0}\t".format(str(self.node1)).expandtabs(20),
+                                 "{0}\t".format(str(self.node2)).expandtabs(20),
                                  "{0}\t".format(str(self.diameter)).expandtabs(12),
                                  "{0}\t".format(str(self.valve_type)).expandtabs(12),
                                  "{0}\t".format(str(self.setting)).expandtabs(12),
@@ -97,7 +98,8 @@ class Valves(object):
     def export_shapefile(self, f):
         if len(self.valves) == 0:
             return
-        with shapefile.Writer("{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "valves")) as _shp:
+        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "valves")
+        with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
             _shp.field('elevation', 'C', 254)
@@ -109,3 +111,4 @@ class Valves(object):
                 _shp.point(float(v.lon), float(v.lat))
                 _shp.record(v.id, v.elevation, v.diameter, v.valve_type, v.setting, v.minor_loss)
             _shp.close()
+        self.createProjection(filename)
