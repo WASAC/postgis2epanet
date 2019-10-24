@@ -45,8 +45,17 @@ class Tasks(object):
             self.db = db
             self.dist = district
             self.export_dir = export_dir
-            self.export_file = "{0}/{1}.inp".format(export_dir, wss_id)
             self.wss_id = wss_id
+            self.wss_name = self.get_wss_name()
+            self.export_file = "{0}/{1}_{2}.inp".format(export_dir, wss_id, self.wss_name)
+
+        def get_wss_name(self):
+            query = "SELECT wss_name FROM wss WHERE wss_id = {0}".format(self.wss_id)
+            result = self.db.execute(query)
+            wss_name = ""
+            for data in result:
+                wss_name = data[0].replace(" ", "")
+            return wss_name
 
         def execute(self):
             with open(self.export_file, 'a') as f:
@@ -73,7 +82,7 @@ class Tasks(object):
                 valves.get_data(self.db)
 
                 common = Common()
-                common.start(f, "{0} WSS in {1} District".format(self.wss_id, self.dist.district))
+                common.start(f, "{0} {1} WSS in {2} District".format(self.wss_id, self.wss_name, self.dist.district))
                 coords.export_junctions(f)
                 reservoirs.export(f)
                 tanks.export(f)
