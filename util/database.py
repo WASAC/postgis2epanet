@@ -47,3 +47,11 @@ class Database(object):
                 exit()
             rows = cur.fetchall()
             return rows
+
+    def update(self, query):
+        with self.conn.cursor() as cur:
+            try:
+                cur.execute(query)
+            except Exception as exc:
+                print("Unable to execute query. Error was {0}".format(str(exc)))
+                exit()
