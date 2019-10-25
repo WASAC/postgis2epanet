@@ -93,14 +93,21 @@ C:.
 ## How can we analyse after creating INP file/Shapefiles?
 There are 3 options as follows.
 1. Use EPANET application to do analysis. You can directly import INP file to EPANET.
-    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20EPANET.gif)
+    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/how_to_use_qwater.jpg)
 1. Use QGIS to analyse by ````QWater```` Plugin.
     <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
-    1. Import Shapefiles for each WSS to QGIS3.
+    1. You can double-click .qgz file to launch QGIS3.
     1. Install ````QWater```` Plugin on QGIS3. See manual of QWater [here](https://github.com/jorgealmerio/QWater/blob/master/tutorial_en.md).
+    1. To do settings of layers again.
+    1. To do make model again.
+    1. If necessary, you can revise the following values for some layers.
+        1.diameter of pipes (some diameter might be missing)
+        1.demand of junctions (some no of users might be missing)
+        1.water level & diameter of tanks (our DB don't have water level and diameter information, so I put the same values as default)
     1. Do analysis by ````QWater````
+    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
 
-1. Use QGIS to analyse by both ````ImportEpanetInpFiles```` and ````QWater```` Plugin.
+1. If you want to import existing INP file to QWater, please use both ````ImportEpanetInpFiles```` and ````QWater```` Plugin.
     1. Install ````ImportEpanetInpFiles```` plugin to import INP file to QGIS3.
     1. You can rename column name as following table.
     1. Install ````QWater```` to do analysis. 
