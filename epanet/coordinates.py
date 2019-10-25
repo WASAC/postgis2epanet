@@ -127,5 +127,4 @@ class Coordinates(LayerBase):
             target_key = ",".join([str(conn.lon), str(conn.lat)])
             for key in self.coordMap:
                 if key == target_key:
-                    self.coordMap[key].id = "{0}({1})".format(self.coordMap[key].id, conn.type).replace(" ","_")
                     self.coordMap[key].demand = conn.demands

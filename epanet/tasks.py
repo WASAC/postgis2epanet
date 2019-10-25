@@ -105,3 +105,4 @@ class Tasks(object):
                 reservoirs.export_shapefile(f)
                 pumps.export_shapefile(f)
                 valves.export_shapefile(f)
+                shutil.copy("./templates/template_qgs_project.qgz", "{0}/{1}_{2}.qgz".format(f.name.replace(".inp", ""), self.wss_id, self.wss_name))
