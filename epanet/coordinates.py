@@ -45,10 +45,8 @@ class Coordinates(LayerBase):
                                  "{0}\t".format(self.lat).expandtabs(16)))
 
     def __init__(self, wss_id):
-        self.wss_id = wss_id
+        super().__init__("junctions", wss_id)
         self.coordMap = {}
-        self.epsg = 4326
-        self.epsg_utm = 32736
 
     def get_coord_by_id(self, id):
         for key in self.coordMap:
@@ -106,7 +104,7 @@ class Coordinates(LayerBase):
         f.writelines("\n")
 
     def export_shapefile(self, f, del_coords_id):
-        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "junctions")
+        filename = self.get_file_path(f)
         with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)

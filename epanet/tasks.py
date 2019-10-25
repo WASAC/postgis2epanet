@@ -3,6 +3,7 @@ import shutil
 import datetime
 from util.database import Database
 from util.district import Districts
+from util.wss import WaterSupplySystems
 from epanet.common import Common
 from epanet.coordinates import Coordinates
 from epanet.pipes import Pipes
@@ -20,6 +21,8 @@ class Tasks(object):
         self.districts = districts_obj.get_wss_list_each_district(self.db)
         self.main_dir = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + "_epanet_data"
         self.exportdir_list = []
+        wss_list_obj = WaterSupplySystems()
+        self.wss_list = wss_list_obj.get_wss_list(self.db)
 
     def get_tasks(self):
         obj_list = []
@@ -28,7 +31,8 @@ class Tasks(object):
             self.exportdir_list.append(export_dir)
             os.makedirs(export_dir, exist_ok=True)
             for wss_id in dist.wss_id_list.split(","):
-                obj_list.append(Tasks.Task(self.db, dist, export_dir, wss_id))
+                wss = self.wss_list[str(wss_id)]
+                obj_list.append(Tasks.Task(self.db, dist, export_dir, wss))
         return obj_list
 
     def archive(self, directory):
@@ -41,24 +45,16 @@ class Tasks(object):
         self.archive(self.main_dir)
 
     class Task(object):
-        def __init__(self, db, district, export_dir, wss_id):
+        def __init__(self, db, district, export_dir, wss):
             self.db = db
             self.dist = district
             self.export_dir = export_dir
-            self.wss_id = wss_id
-            self.wss_name = self.get_wss_name()
-            self.export_file = "{0}/{1}_{2}.inp".format(export_dir, wss_id, self.wss_name)
-
-        def get_wss_name(self):
-            query = "SELECT wss_name FROM wss WHERE wss_id = {0}".format(self.wss_id)
-            result = self.db.execute(query)
-            wss_name = ""
-            for data in result:
-                wss_name = data[0].replace(" ", "")
-            return wss_name
+            self.wss_id = wss.wss_id
+            self.wss_name = wss.wss_name
+            self.export_file = "{0}/{1}_{2}.inp".format(export_dir, self.wss_id, self.wss_name)
 
         def execute(self):
-            with open(self.export_file, 'a') as f:
+            with open(self.export_file, 'a', encoding='UTF-8') as f:
                 coords = Coordinates(self.wss_id)
                 coords.get_data(self.db)
 

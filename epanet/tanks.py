@@ -43,10 +43,9 @@ class Tanks(LayerBase):
                                  ))
 
     def __init__(self, wss_id, coords):
-        self.wss_id = wss_id
+        super().__init__("tanks", wss_id)
         self.coords = coords
         self.tanks = []
-        self.epsg_utm = 32736
 
     def get_data(self, db):
         query = " SELECT reservoir_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, capacity,  "
@@ -77,7 +76,7 @@ class Tanks(LayerBase):
     def export_shapefile(self, f):
         if len(self.tanks) == 0:
             return
-        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "tanks")
+        filename = self.get_file_path(f)
         with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)

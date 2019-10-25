@@ -43,7 +43,7 @@ class Pipes(LayerBase):
                                  ))
 
     def __init__(self, wss_id, coords):
-        self.wss_id = wss_id
+        super().__init__("pipes", wss_id)
         self.coords = coords
         self.pipes = []
 
@@ -91,7 +91,7 @@ class Pipes(LayerBase):
     def export_shapefile(self, f):
         if len(self.pipes) == 0:
             return
-        filename = "{0}/{1}_{2}".format(f.name.replace(".inp", ""), self.wss_id, "pipes")
+        filename = self.get_file_path(f)
         with shapefile.Writer(filename) as _shp:
             _shp.autoBalance = 1
             _shp.field('dc_id', 'C', 254)
