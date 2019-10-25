@@ -93,9 +93,9 @@ C:.
 ## How can we analyse after creating INP file/Shapefiles?
 There are 3 options as follows.
 1. Use EPANET application to do analysis. You can directly import INP file to EPANET.
-    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/how_to_use_qwater.jpg)
+    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20EPANET.gif)
 1. Use QGIS to analyse by ````QWater```` Plugin.
-    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/How%20to%20use%20QWater%20for%20EPANET%20on%20QGIS%20plugin.gif)
+    <br>![result](https://github.com/JinIgarashi/postgis2epanet/blob/master/images/how_to_use_qwater.jpg)
     1. You can double-click .qgz file to launch QGIS3.
     1. Install ````QWater```` Plugin on QGIS3. See manual of QWater [here](https://github.com/jorgealmerio/QWater/blob/master/tutorial_en.md).
     1. To do settings of layers again.
