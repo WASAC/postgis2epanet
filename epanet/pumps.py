@@ -127,5 +127,6 @@ class Pumps(LayerBase):
             for p in self.pumps:
                 _shp.point(float(p.lon), float(p.lat))
                 _shp.record(p.id, p.elevation, p.curve.head, p.curve.flow, None, "POWER {0}".format(str(1)))
+                self.updatePipeNode(p)
             _shp.close()
         self.createProjection(filename)

@@ -110,5 +110,7 @@ class Valves(LayerBase):
             for v in self.valves:
                 _shp.point(float(v.lon), float(v.lat))
                 _shp.record(v.id, v.elevation, v.diameter, v.valve_type, v.setting, v.minor_loss)
+                self.updatePipeNode(v)
             _shp.close()
         self.createProjection(filename)
+

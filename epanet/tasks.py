@@ -86,7 +86,7 @@ class Tasks(object):
                 tanks.export(f)
                 #join lists of pipes id which duplicates from pumps and valves.
                 del_pipes_id = []
-                del_pipes_id.extend( pumps.get_del_pipes_id_for_inp())
+                del_pipes_id.extend(pumps.get_del_pipes_id_for_inp())
                 del_pipes_id.extend(valves.get_del_pipes_id_for_inp())
                 pipes.export(f, del_pipes_id)
                 pumps.export(f)
@@ -101,10 +101,10 @@ class Tasks(object):
                 del_coords_id = []
                 del_coords_id.extend(pumps.get_del_coords_id_for_inp())
                 del_coords_id.extend(valves.get_del_coords_id_for_inp())
-                coords.export_shapefile(f, del_coords_id)
-                pipes.export_shapefile(f)
                 tanks.export_shapefile(f)
                 reservoirs.export_shapefile(f)
                 pumps.export_shapefile(f)
                 valves.export_shapefile(f)
+                coords.export_shapefile(f, del_coords_id)
+                pipes.export_shapefile(f)
                 shutil.copy("./templates/template_qgs_project.qgz", "{0}/{1}_{2}.qgz".format(f.name.replace(".inp", ""), self.wss_id, self.wss_name))

@@ -16,6 +16,10 @@ class Pipes(LayerBase):
             self.minorloss = 0
             self.status = "Open"
 
+        def set_node(self, node1, node2):
+            self.node1 = node1
+            self.node2 = node2
+
         @staticmethod
         def create_header(f):
             f.writelines("[PIPES]\n")
