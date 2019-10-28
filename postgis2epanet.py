@@ -11,7 +11,7 @@ def create_argument_parser():
     parser = argparse.ArgumentParser(
         description="Create EPANET INP file each WSS/District from PostGIS database.",
         epilog="Example usage: python postgis2epanet.py -d yourdatabase -H localhost - p 5432 "
-               "-u user -w securePassword -l list_of_distID(seperated by comma)"
+               "-u user -w securePassword -l list_of_distID(seperated by comma) -e(optional)"
     )
     parser.add_argument("-d", "--database", dest="database",
                         type=str, required=True,
@@ -37,6 +37,10 @@ def create_argument_parser():
     parser.add_argument("-l", "--dist_id", dest="dist_id",
                         default="", type=str,
                         help="List of district ID which you want to export. For example, '51,52,53'")
+
+    parser.add_argument("-e", "--elevation", action="store_true",
+                        default=False,
+                        help="If you use this option, the script is going to update elevation field of all layers.")
 
     return parser.parse_args()
 

@@ -22,7 +22,8 @@ class Tasks(object):
         self.main_dir = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + "_epanet_data"
         self.exportdir_list = []
         wss_list_obj = WaterSupplySystems()
-        wss_list_obj.update_elevations(self.db)
+        if args.elevation == True:
+            wss_list_obj.update_elevations(self.db)
         self.wss_list = wss_list_obj.get_wss_list(self.db)
 
     def get_tasks(self):
