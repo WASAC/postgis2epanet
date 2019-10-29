@@ -37,6 +37,12 @@ If you want to filter only specific dictricts, use ````-l```` parameter to list 
 python postgis2epanet.py -l 51,52,53
 ````
 
+If you want to update elevation from DEM file, use ````-e```` parameter to update elevation. The script will not update elevation as default.
+
+````
+python postgis2epanet.py -e
+````
+
 ***
 ## Result of the Script:
 
