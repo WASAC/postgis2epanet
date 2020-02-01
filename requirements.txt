@@ -1,0 +1,4 @@
+light-progress==0.2.1.1
+psycopg2==2.8.4
+pyshp==2.1.0
+Shapely==1.7.0

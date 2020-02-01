@@ -10,10 +10,17 @@ A simple tool for exporting from a PostGIS table to EPANET INP file (You can fin
 [light-progress](https://pypi.org/project/light-progress/),
 are already installed and in your ````PATH````.
 
+You can install using pip by requirements.txt as follow.
+````
+pip install -r requirements.txt
+````
+
+Or the following is example of installation procedures by pip installation manually.
+
 The following is example of installation procedures by pip installation.
 ````
 pip install psycopg2
-pip install Shapely-1.6.4.post1-cp37-cp37m-win_amd64.whl
+pip install shapely
 pip install pyshp
 pip install light-progress
 ````
@@ -28,7 +35,7 @@ To export ````water pipeline network````from database ````rwss_assets```` as use
 
 Before running the script, kindly check the database settings at command line parameters.
 ````
-python postgis2epanet.py -d yourdatabase -H localhost - p 5432 -u user -w securePassword
+python postgis2epanet.py -d yourdatabase -H localhost -p 5432 -u user -w securePassword
 ````
 
 If you want to filter only specific dictricts, use ````-l```` parameter to list ID of district by comma(,)
