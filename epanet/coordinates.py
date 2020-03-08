@@ -44,8 +44,8 @@ class Coordinates(LayerBase):
                                  "{0}\t".format(self.lon).expandtabs(16),
                                  "{0}\t".format(self.lat).expandtabs(16)))
 
-    def __init__(self, wss_id):
-        super().__init__("junctions", wss_id)
+    def __init__(self, wss_id, config):
+        super().__init__("junctions", wss_id, config)
         self.coordMap = {}
 
     def get_coord_by_id(self, id):

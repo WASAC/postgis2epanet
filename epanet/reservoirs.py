@@ -28,16 +28,13 @@ class Reservoirs(LayerBase):
                                  "{0}\t".format(str(self.pattern)).expandtabs(16)
                                  ))
 
-    def __init__(self, wss_id, coords):
-        super().__init__("reservoirs", wss_id)
+    def __init__(self, wss_id, coords, config):
+        super().__init__("reservoirs", wss_id, config)
         self.coords = coords
         self.reservoirs = []
 
     def get_data(self, db):
-        query = " SELECT watersource_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, source_type,    "
-        query += " st_x(st_transform(geom,{0})) as lon_utm, st_y(st_transform(geom,{0})) as lat_utm  "\
-            .format(self.epsg_utm)
-        query += "FROM watersource WHERE wss_id={0} ".format(str(self.wss_id))
+        query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
             id = data[0]

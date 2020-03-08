@@ -1,6 +1,7 @@
 import os
 import shutil
 import datetime
+import json
 from util.database import Database
 from util.district import Districts
 from util.wss import WaterSupplySystems
@@ -20,11 +21,16 @@ class Tasks(object):
         districts_obj = Districts(args.dist_id)
         self.districts = districts_obj.get_wss_list_each_district(self.db)
         self.main_dir = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + "_epanet_data"
+        self.load_config(args.config)
         self.exportdir_list = []
         wss_list_obj = WaterSupplySystems()
         if args.elevation == True:
             wss_list_obj.update_elevations(self.db)
         self.wss_list = wss_list_obj.get_wss_list(self.db)
+
+    def load_config(self, config):
+        with open(config) as f:
+            self.config = json.load(f)
 
     def get_tasks(self):
         obj_list = []
@@ -34,7 +40,7 @@ class Tasks(object):
             os.makedirs(export_dir, exist_ok=True)
             for wss_id in dist.wss_id_list.split(","):
                 wss = self.wss_list[str(wss_id)]
-                obj_list.append(Tasks.Task(self.db, dist, export_dir, wss))
+                obj_list.append(Tasks.Task(self.db, dist, export_dir, wss, self.config))
         return obj_list
 
     def archive(self, directory):
@@ -47,36 +53,37 @@ class Tasks(object):
         self.archive(self.main_dir)
 
     class Task(object):
-        def __init__(self, db, district, export_dir, wss):
+        def __init__(self, db, district, export_dir, wss, config):
             self.db = db
             self.dist = district
             self.export_dir = export_dir
             self.wss_id = wss.wss_id
             self.wss_name = wss.wss_name
+            self.config = config
             self.export_file = "{0}/{1}_{2}.inp".format(export_dir, self.wss_id, self.wss_name)
 
         def execute(self):
             with open(self.export_file, 'a', encoding='UTF-8') as f:
-                coords = Coordinates(self.wss_id)
+                coords = Coordinates(self.wss_id, self.config)
                 coords.get_data(self.db)
 
                 conns = Connections(self.wss_id)
                 conns.get_data(self.db)
                 coords.add_demands(conns.connections)
 
-                reservoirs = Reservoirs(self.wss_id, coords)
+                reservoirs = Reservoirs(self.wss_id, coords, self.config)
                 reservoirs.get_data(self.db)
 
-                tanks = Tanks(self.wss_id, coords)
+                tanks = Tanks(self.wss_id, coords, self.config)
                 tanks.get_data(self.db)
 
-                pipes = Pipes(self.wss_id, coords)
+                pipes = Pipes(self.wss_id, coords, self.config)
                 pipes.get_data(self.db)
 
-                pumps = Pumps(self.wss_id, coords, pipes.pipes)
+                pumps = Pumps(self.wss_id, coords, pipes.pipes, self.config)
                 pumps.get_data(self.db)
 
-                valves = Valves(self.wss_id, coords, pipes.pipes)
+                valves = Valves(self.wss_id, coords, pipes.pipes, self.config)
                 valves.get_data(self.db)
 
                 common = Common()

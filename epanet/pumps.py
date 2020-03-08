@@ -58,8 +58,8 @@ class Pumps(LayerBase):
                                  "{0}\t".format(str(self.head)).expandtabs(12)
                                  ))
 
-    def __init__(self, wss_id, coords, pipes):
-        super().__init__("pumps", wss_id)
+    def __init__(self, wss_id, coords, pipes, config):
+        super().__init__("pumps", wss_id, config)
         self.coords = coords
         self.pipes = pipes
         self.pumps = []

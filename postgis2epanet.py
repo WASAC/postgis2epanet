@@ -2,6 +2,7 @@ import argparse
 from epanet.tasks import Tasks
 from util.taskmanager import TaskManager
 import atexit
+import os
 
 
 def create_argument_parser():
@@ -42,11 +43,17 @@ def create_argument_parser():
                         default=False,
                         help="If you use this option, the script is going to update elevation field of all layers.")
 
+    parser.add_argument("-c", "--config", dest="config",
+                        default="config.json",
+                        help="Configuration file path. It should be put at the same folder of postgis2epanet.py")
+
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = create_argument_parser()
+    root = os.path.dirname(os.path.abspath(__file__))
+    args.config="{0}/{1}".format(root, args.config)
     t = Tasks(args)
     tasks = t.get_tasks()
     tm = TaskManager(tasks)

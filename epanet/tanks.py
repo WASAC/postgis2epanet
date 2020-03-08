@@ -42,8 +42,8 @@ class Tanks(LayerBase):
                                  "{0}\t".format(str(self.vol_curve)).expandtabs(16)
                                  ))
 
-    def __init__(self, wss_id, coords):
-        super().__init__("tanks", wss_id)
+    def __init__(self, wss_id, coords, config):
+        super().__init__("tanks", wss_id, config)
         self.coords = coords
         self.tanks = []
 

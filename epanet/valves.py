@@ -44,8 +44,8 @@ class Valves(LayerBase):
                                  "{0}\t".format(str(self.minor_loss)).expandtabs(12)
                                  ))
 
-    def __init__(self, wss_id, coords, pipes):
-        super().__init__("valves", wss_id)
+    def __init__(self, wss_id, coords, pipes, config):
+        super().__init__("valves", wss_id, config)
         self.coords = coords
         self.pipes = pipes
         self.valves = []
