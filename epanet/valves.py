@@ -59,12 +59,7 @@ class Valves(LayerBase):
         return self.del_coords_id
 
     def get_data(self, db):
-        query = " SELECT a.chamber_id, st_x(a.geom) as lon, st_y(a.geom) as lat, " \
-                "a.elevation, max(b.pipe_size) as diameter, " \
-                "case a.chamber_type when 'Valve chamber' then 'TCV' when 'PRV chamber' then 'PRV' END as valve_type " \
-                " FROM chamber a INNER JOIN pipeline b ON st_intersects(a.geom, b.geom) " \
-                " WHERE a.wss_id = {0} and a.chamber_type IN ('Valve chamber', 'PRV chamber') " \
-                " GROUP BY chamber_id, lon, lat, elevation ".format(self.wss_id)
+        query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
             id = data[0]

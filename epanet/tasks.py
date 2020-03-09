@@ -67,7 +67,7 @@ class Tasks(object):
                 coords = Coordinates(self.wss_id, self.config)
                 coords.get_data(self.db)
 
-                conns = Connections(self.wss_id)
+                conns = Connections(self.wss_id, self.config)
                 conns.get_data(self.db)
                 coords.add_demands(conns.connections)
 

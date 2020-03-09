@@ -55,23 +55,7 @@ class Coordinates(LayerBase):
                 return coord
 
     def get_data(self, db):
-        query = " WITH points2d AS "
-        query += "     (SELECT (ST_DumpPoints(geom)).geom AS geom FROM pipeline where wss_id={0}), ".format(self.wss_id)
-        query += "   cells AS "
-        query += "     (SELECT p.geom AS geom, ST_Value(a.rast, 1, p.geom) AS alt,  "
-        query += "      ST_X(geom) as lon, ST_Y(geom) as lat "
-        query += "      FROM rwanda_dem_10m a RIGHT JOIN points2d p "
-        query += "      ON ST_Intersects(a.rast, p.geom)), "
-        query += "   points3d AS "
-        query += "     (SELECT "
-        query += "     ST_SetSRID(COALESCE(" \
-                 "ST_MakePoint(lon, lat, alt), " \
-                 "ST_MakePoint(lon, lat)), {0}) AS geom ".format(str(self.epsg))
-        query += "      , lon, lat, alt "
-        query += "     FROM cells) "
-        query += " SELECT row_number() over() as id,st_x(geom) as lon, st_y(geom) as lat, st_z(geom)as alt, "
-        query += " st_x(st_transform(geom,{0})) as lon_utm, st_y(st_transform(geom,{0})) as lat_utm ".format(str(self.epsg_utm))
-        query += " FROM points3d WHERE geom is not NULL"
+        query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
             coord = Coordinates.Coordinate("Node-" + str(data[0]), data[1], data[2], data[3], data[4], data[5])

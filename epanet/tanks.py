@@ -48,10 +48,7 @@ class Tanks(LayerBase):
         self.tanks = []
 
     def get_data(self, db):
-        query = " SELECT reservoir_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, capacity,  "
-        query += " st_x(st_transform(geom,{0})) as lon_utm, st_y(st_transform(geom,{0})) as lat_utm  "\
-            .format(self.epsg_utm)
-        query += "FROM reservoir WHERE wss_id={0} ".format(str(self.wss_id))
+        query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
             id = data[0]

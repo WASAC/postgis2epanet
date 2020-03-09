@@ -52,8 +52,7 @@ class Pipes(LayerBase):
         self.pipes = []
 
     def get_data(self, db):
-        query = " SELECT pipe_id, pipe_size, ST_AsGeoJSON(st_multi(geom)) as geojson " \
-                "FROM pipeline WHERE wss_id={0} ".format(str(self.wss_id))
+        query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
             pipe_id = data[0]

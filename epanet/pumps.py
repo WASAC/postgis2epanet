@@ -73,9 +73,7 @@ class Pumps(LayerBase):
         return self.del_coords_id
 
     def get_data(self, db):
-        query = " SELECT pumpingstation_id as id, st_x(geom) as lon, st_y(geom) as lat, " \
-                "elevation, head_pump, discharge_pump  "
-        query += " FROM pumping_station WHERE wss_id={0} ".format(str(self.wss_id))
+        query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
             id = data[0]
