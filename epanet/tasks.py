@@ -23,14 +23,18 @@ class Tasks(object):
         self.main_dir = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + "_epanet_data"
         self.load_config(args.config)
         self.exportdir_list = []
-        wss_list_obj = WaterSupplySystems()
-        if args.elevation == True:
-            wss_list_obj.update_elevations(self.db)
+        self.update_elevation(args.elevation)
+        wss_list_obj = WaterSupplySystems(self.config)
         self.wss_list = wss_list_obj.get_wss_list(self.db)
 
     def load_config(self, config):
         with open(config) as f:
             self.config = json.load(f)
+
+    def update_elevation(self, elevation):
+        if elevation:
+            sql = "".join(self.config["prepare"]["elevation"])
+            self.db.update(sql)
 
     def get_tasks(self):
         obj_list = []
