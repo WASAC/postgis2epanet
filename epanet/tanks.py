@@ -8,21 +8,9 @@ class Tanks(LayerBase):
             self.id = data["id"]
             self.elevation = data["elevation"] or 0
             self.capacity = data["capacity"] or 0
-            if "max_level" in data:
-                self.max_level = data["max_level"]
-            else:
-                self.max_level = 1.5
-
-            if "init_level" in data:
-                self.init_level = data["init_level"]
-            else:
-                self.init_level = self.max_level * 0.5
-
-            if "min_level" in data:
-                self.min_level = data["min_level"]
-            else:
-                self.min_level = self.max_level * 0.1
-
+            self.max_level = data["max_level"] or 1.5
+            self.init_level = data["init_level"] or 0.75
+            self.min_level = data["min_level"] or 0.15
             self.lon = round(data["lon"], 6)
             self.lat = round(data["lat"], 6)
             self.diameter = 5

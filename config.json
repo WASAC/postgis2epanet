@@ -49,6 +49,7 @@
   "tanks": {
     "sql" : [
       "SELECT 'Tank-' || reservoir_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, capacity, ",
+      "0.75 as init_level, 0.15 as min_level, 1.5 as max_level, ",
       "st_x(st_transform(geom,%epsg_utm%)) as lon_utm, st_y(st_transform(geom,%epsg_utm%)) as lat_utm ",
       "FROM reservoir WHERE wss_id={0}"
     ]
