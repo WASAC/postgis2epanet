@@ -8,41 +8,11 @@ class Coordinates(LayerBase):
             self.id = data["id"]
             self.lon = round(data["lon"], 6)
             self.lat = round(data["lat"], 6)
-            self.altitude = data["elevation"] or 0
+            self.elevation = data["elevation"] or 0
             self.lon_utm = round(data["lon_utm"], 3)
             self.lat_utm = round(data["lat_utm"], 3)
             self.demand = 0.0
             self.pattern = ""
-
-        @staticmethod
-        def create_header_junction(f):
-            f.writelines("[JUNCTIONS]\n")
-            f.writelines(";{0}\t{1}\t{2}\t{3}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Elev\t".expandtabs(12),
-                                 "Demand\t".expandtabs(12),
-                                 "Pattern\t".expandtabs(16)))
-
-        def add_junction(self, f):
-            f.writelines(" {0}\t{1}\t{2}\t{3}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(self.altitude).expandtabs(12),
-                                 "{0}\t".format(self.demand).expandtabs(12),
-                                 "{0}\t".format(self.pattern).expandtabs(16)))
-
-        @staticmethod
-        def create_header_coordinates(f):
-            f.writelines("[COORDINATES]\n")
-            f.writelines(";{0}\t{1}\t{2}\n"
-                         .format("Node\t".expandtabs(20),
-                                 "X-Coord\t".expandtabs(16),
-                                 "Y-Coord\t".expandtabs(16)))
-
-        def add_coordinate(self, f):
-            f.writelines(" {0}\t{1}\t{2}\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(self.lon).expandtabs(16),
-                                 "{0}\t".format(self.lat).expandtabs(16)))
 
     def __init__(self, wss_id, config):
         super().__init__("junctions", wss_id, config)
@@ -72,21 +42,6 @@ class Coordinates(LayerBase):
             self.coordMap.pop(key)
         self.coordMap[target_key] = coord
 
-    def export_junctions(self, f):
-        Coordinates.Coordinate.create_header_junction(f)
-        for key in self.coordMap:
-            coord = self.coordMap[key]
-            if "Node" in coord.id:
-                coord.add_junction(f)
-        f.writelines("\n")
-
-    def export_coordinates(self, f):
-        Coordinates.Coordinate.create_header_coordinates(f)
-        for key in self.coordMap:
-            coord = self.coordMap[key]
-            coord.add_coordinate(f)
-        f.writelines("\n")
-
     def export_shapefile(self, f, del_coords_id):
         filename = self.get_file_path(f)
         with shapefile.Writer(filename) as _shp:
@@ -102,7 +57,7 @@ class Coordinates(LayerBase):
                     if coord.id in del_coords_id:
                         continue
                     _shp.point(float(coord.lon), float(coord.lat))
-                    _shp.record(coord.id, coord.altitude, coord.pattern, coord.demand, '')
+                    _shp.record(coord.id, coord.elevation, coord.pattern, coord.demand, '')
             _shp.close()
         self.createProjection(filename)
 

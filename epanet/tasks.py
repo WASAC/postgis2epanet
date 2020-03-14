@@ -13,6 +13,7 @@ from epanet.tanks import Tanks
 from epanet.pumps import Pumps
 from epanet.valves import Valves
 from epanet.connections import Connections
+from format.inp import InpJunctions, InpPipes, InpPumps, InpCurve, InpReservoirs, InpTanks, InpValves, InpCoordinates, InpTitle, InpTags, InpOptions, InpEnd
 
 
 class Tasks(object):
@@ -90,23 +91,24 @@ class Tasks(object):
                 valves = Valves(self.wss_id, coords, pipes.pipes, self.config)
                 valves.get_data(self.db)
 
-                common = Common()
-                common.start(f, "{0} {1} WSS in {2} District".format(self.wss_id, self.wss_name, self.dist.district))
-                coords.export_junctions(f)
-                reservoirs.export(f)
-                tanks.export(f)
-                #join lists of pipes id which duplicates from pumps and valves.
+                # join lists of pipes id which duplicates from pumps and valves.
                 del_pipes_id = []
                 del_pipes_id.extend(pumps.get_del_pipes_id_for_inp())
                 del_pipes_id.extend(valves.get_del_pipes_id_for_inp())
-                pipes.export(f, del_pipes_id)
-                pumps.export(f)
-                valves.export(f)
-                common.export_tags(f)
-                pumps.export_curve(f)
-                common.export_options(f)
-                coords.export_coordinates(f)
-                common.end(f)
+
+                for inp in [InpTitle(f, "{0} {1} WSS in {2} District".format(self.wss_id, self.wss_name, self.dist.district)),
+                            InpJunctions(f, coords.coordMap),
+                            InpReservoirs(f, reservoirs.reservoirs),
+                            InpTanks(f, tanks.tanks),
+                            InpPipes(f, pipes.pipes, del_pipes_id),
+                            InpPumps(f, pumps.pumps),
+                            InpValves(f, valves.valves),
+                            InpTags(f),
+                            InpCurve(f, pumps.pumps),
+                            InpOptions(f),
+                            InpCoordinates(f, coords.coordMap),
+                            InpEnd(f)]:
+                    inp.export()
 
                 # join lists of coordinate id which duplicates from pumps and valves.
                 del_coords_id = []

@@ -20,32 +20,6 @@ class Pipes(LayerBase):
             self.node1 = node1
             self.node2 = node2
 
-        @staticmethod
-        def create_header(f):
-            f.writelines("[PIPES]\n")
-            f.writelines(";{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Node1\t".expandtabs(20),
-                                 "Node2\t".expandtabs(20),
-                                 "Length\t".expandtabs(12),
-                                 "Diameter\t".expandtabs(12),
-                                 "Roughness\t".expandtabs(12),
-                                 "MinorLoss\t".expandtabs(12),
-                                 "Status"
-                                 ))
-
-        def add(self, f):
-            f.writelines(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.node1)).expandtabs(20),
-                                 "{0}\t".format(str(self.node2)).expandtabs(20),
-                                 "{0}\t".format(str(self.length)).expandtabs(12),
-                                 "{0}\t".format(str(self.diameter)).expandtabs(12),
-                                 "{0}\t".format(str(self.roughness)).expandtabs(12),
-                                 "{0}\t".format(str(self.minorloss)).expandtabs(12),
-                                 "{0}\t".format(self.status).expandtabs(6)
-                                 ))
-
     def __init__(self, wss_id, coords, config):
         super().__init__("pipes", wss_id, config)
         self.coords = coords
@@ -83,13 +57,6 @@ class Pipes(LayerBase):
                         _id = "{0}-{1}".format(pipe_id, i)
                         pipe = Pipes.Pipe(_id, node1, node2, length, pipe_size)
                         self.pipes.append(pipe)
-
-    def export(self, f, del_pipes_id):
-        Pipes.Pipe.create_header(f)
-        for pipe in self.pipes:
-            if not pipe.id in del_pipes_id:
-                pipe.add(f)
-        f.writelines("\n")
 
     def export_shapefile(self, f):
         if len(self.pipes) == 0:

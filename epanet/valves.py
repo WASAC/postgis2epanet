@@ -20,30 +20,6 @@ class Valves(LayerBase):
             self.node1 = node1
             self.node2 = node2
 
-        @staticmethod
-        def create_header(f):
-            f.writelines("[VALVES]\n")
-            f.writelines(";{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Node1\t".expandtabs(16),
-                                 "Node2\t".expandtabs(16),
-                                 "Diameter\t".expandtabs(12),
-                                 "Type\t".expandtabs(12),
-                                 "Setting\t".expandtabs(12),
-                                 "MinorLoss\t".expandtabs(12),
-                                 ))
-
-        def add(self, f):
-            f.writelines(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.node1)).expandtabs(20),
-                                 "{0}\t".format(str(self.node2)).expandtabs(20),
-                                 "{0}\t".format(str(self.diameter)).expandtabs(12),
-                                 "{0}\t".format(str(self.valve_type)).expandtabs(12),
-                                 "{0}\t".format(str(self.setting)).expandtabs(12),
-                                 "{0}\t".format(str(self.minor_loss)).expandtabs(12)
-                                 ))
-
     def __init__(self, wss_id, coords, pipes, config):
         super().__init__("valves", wss_id, config)
         self.coords = coords
@@ -77,12 +53,6 @@ class Valves(LayerBase):
                         del_pipe_idx = p.id
                 if del_pipe_idx != -1:
                     self.del_pipes_id.append(del_pipe_idx)
-
-    def export(self, f):
-        Valves.Valve.create_header(f)
-        for v in self.valves:
-            v.add(f)
-        f.writelines("\n")
 
     def export_shapefile(self, f):
         if len(self.valves) == 0:

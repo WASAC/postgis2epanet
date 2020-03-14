@@ -13,22 +13,6 @@ class Reservoirs(LayerBase):
             self.lon = round(data["lon"], 6)
             self.lat = round(data["lat"], 6)
 
-        @staticmethod
-        def create_header(f):
-            f.writelines("[RESERVOIRS]\n")
-            f.writelines(";{0}\t{1}\t{2}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Head\t".expandtabs(12),
-                                 "Pattern\t".expandtabs(16)
-                                 ))
-
-        def add(self, f):
-            f.writelines(" {0}\t{1}\t{2}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.elevation)).expandtabs(12),
-                                 "{0}\t".format(str(self.pattern)).expandtabs(16)
-                                 ))
-
     def __init__(self, wss_id, coords, config):
         super().__init__("reservoirs", wss_id, config)
         self.coords = coords
@@ -42,12 +26,6 @@ class Reservoirs(LayerBase):
             self.reservoirs.append(r)
             coord = Coordinates.Coordinate(data)
             self.coords.add_coordinate(coord)
-
-    def export(self, f):
-        Reservoirs.Reservoir.create_header(f)
-        for r in self.reservoirs:
-            r.add(f)
-        f.writelines("\n")
 
     def export_shapefile(self, f):
         if len(self.reservoirs) == 0:

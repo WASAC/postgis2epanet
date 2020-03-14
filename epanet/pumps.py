@@ -18,45 +18,11 @@ class Pumps(LayerBase):
             self.node1 = node1
             self.node2 = node2
 
-        @staticmethod
-        def create_header(f):
-            f.writelines("[PUMPS]\n")
-            f.writelines(";{0}\t{1}\t{2}\t{3}\n"
-                         .format("ID\t".expandtabs(20),
-                                 "Node1\t".expandtabs(20),
-                                 "Node2\t".expandtabs(20),
-                                 "Parameters\t".expandtabs(12)
-                                 ))
-
-        def add(self, f):
-            f.writelines(" {0}\t{1}\t{2}\t{3}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(str(self.node1)).expandtabs(20),
-                                 "{0}\t".format(str(self.node2)).expandtabs(20),
-                                 "{0}\t".format(str(self.parameter)).expandtabs(12)
-                                 ))
-
     class PumpCurve(object):
         def __init__(self, data):
             self.id = "curve-{0}".format(str(data["id"]))
             self.flow = data["discharge"]
             self.head = data["head"]
-
-        @staticmethod
-        def create_header(f):
-            f.writelines("[CURVES]\n")
-            f.writelines(";{0}\t{1}\t{2}\n"
-                         .format("ID\t".expandtabs(16),
-                                 "X-Value\t".expandtabs(12),
-                                 "Y-Value\t".expandtabs(12)
-                                 ))
-
-        def add(self, f):
-            f.writelines(" {0}\t{1}\t{2}\t;\n"
-                         .format("{0}\t".format(self.id).expandtabs(16),
-                                 "{0}\t".format(str(self.flow)).expandtabs(12),
-                                 "{0}\t".format(str(self.head)).expandtabs(12)
-                                 ))
 
     def __init__(self, wss_id, coords, pipes, config):
         super().__init__("pumps", wss_id, config)
@@ -91,18 +57,6 @@ class Pumps(LayerBase):
                         del_pipe_idx = p.id
                 if del_pipe_idx != -1:
                     self.del_pipes_id.append(del_pipe_idx)
-
-    def export(self, f):
-        Pumps.Pump.create_header(f)
-        for p in self.pumps:
-            p.add(f)
-        f.writelines("\n")
-
-    def export_curve(self, f):
-        Pumps.PumpCurve.create_header(f)
-        for p in self.pumps:
-            p.curve.add(f)
-        f.writelines("\n")
 
     def export_shapefile(self, f):
         if len(self.pumps) == 0:
