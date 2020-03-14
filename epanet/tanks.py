@@ -1,5 +1,4 @@
 from epanet.coordinates import Coordinates
-import shapefile
 from epanet.layer_base import LayerBase
 
 
@@ -43,24 +42,3 @@ class Tanks(LayerBase):
             self.tanks.append(t)
             coord = Coordinates.Coordinate(data)
             self.coords.add_coordinate(coord)
-
-    def export_shapefile(self, f):
-        if len(self.tanks) == 0:
-            return
-        filename = self.get_file_path(f)
-        with shapefile.Writer(filename) as _shp:
-            _shp.autoBalance = 1
-            _shp.field('dc_id', 'C', 254)
-            _shp.field('elevation', 'N', 20)
-            _shp.field('initiallev', 'N', 20)
-            _shp.field('minimumlev', 'N', 20)
-            _shp.field('maximumlev', 'N', 20)
-            _shp.field('diameter', 'N', 20)
-            _shp.field('minimumvol', 'N', 20)
-            _shp.field('volumecurv', 'N', 20)
-            for t in self.tanks:
-                _shp.point(float(t.lon), float(t.lat))
-                _shp.record(t.id, t.elevation, t.init_level, t.min_level, t.max_level,
-                            t.diameter, t.min_vol, t.vol_curve)
-            _shp.close()
-        self.createProjection(filename)

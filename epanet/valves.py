@@ -1,4 +1,3 @@
-import shapefile
 from epanet.layer_base import LayerBase
 
 
@@ -53,23 +52,3 @@ class Valves(LayerBase):
                         del_pipe_idx = p.id
                 if del_pipe_idx != -1:
                     self.del_pipes_id.append(del_pipe_idx)
-
-    def export_shapefile(self, f):
-        if len(self.valves) == 0:
-            return
-        filename = self.get_file_path(f)
-        with shapefile.Writer(filename) as _shp:
-            _shp.autoBalance = 1
-            _shp.field('dc_id', 'C', 254)
-            _shp.field('elevation', 'C', 254)
-            _shp.field('diameter', 'N', 20, 9)
-            _shp.field('type', 'C', 254)
-            _shp.field('setting', 'C', 254)
-            _shp.field('minorloss', 'N', 20, 9)
-            for v in self.valves:
-                _shp.point(float(v.lon), float(v.lat))
-                _shp.record(v.id, v.elevation, v.diameter, v.valve_type, v.setting, v.minor_loss)
-                self.updatePipeNode(v)
-            _shp.close()
-        self.createProjection(filename)
-

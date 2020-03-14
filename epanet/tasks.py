@@ -5,7 +5,6 @@ import json
 from util.database import Database
 from util.district import Districts
 from util.wss import WaterSupplySystems
-from epanet.common import Common
 from epanet.coordinates import Coordinates
 from epanet.pipes import Pipes
 from epanet.reservoirs import Reservoirs
@@ -14,6 +13,7 @@ from epanet.pumps import Pumps
 from epanet.valves import Valves
 from epanet.connections import Connections
 from format.inp import InpJunctions, InpPipes, InpPumps, InpCurve, InpReservoirs, InpTanks, InpValves, InpCoordinates, InpTitle, InpTags, InpOptions, InpEnd
+from format.shp import ShpTanks, ShpReservoirs, ShpCoordinates, ShpPipes, ShpPumps, ShpValves
 
 
 class Tasks(object):
@@ -114,10 +114,13 @@ class Tasks(object):
                 del_coords_id = []
                 del_coords_id.extend(pumps.get_del_coords_id_for_inp())
                 del_coords_id.extend(valves.get_del_coords_id_for_inp())
-                tanks.export_shapefile(f)
-                reservoirs.export_shapefile(f)
-                pumps.export_shapefile(f)
-                valves.export_shapefile(f)
-                coords.export_shapefile(f, del_coords_id)
-                pipes.export_shapefile(f)
+
+                for shp in [ShpTanks(tanks.get_file_path(f), tanks.tanks),
+                            ShpReservoirs(reservoirs.get_file_path(f), reservoirs.reservoirs),
+                            ShpPumps(pumps.get_file_path(f), pumps.pumps, pipes),
+                            ShpValves(valves.get_file_path(f), valves.valves, pipes),
+                            ShpCoordinates(coords.get_file_path(f), coords.coordMap, del_coords_id),
+                            ShpPipes(pipes.get_file_path(f), pipes.pipes, coords)]:
+                    shp.export()
+
                 shutil.copy("./templates/template_qgs_project.qgz", "{0}/{1}_{2}.qgz".format(f.name.replace(".inp", ""), self.wss_id, self.wss_name))

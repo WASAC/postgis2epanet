@@ -1,4 +1,3 @@
-import shapefile
 from epanet.layer_base import LayerBase
 
 
@@ -41,25 +40,6 @@ class Coordinates(LayerBase):
         for key in del_key:
             self.coordMap.pop(key)
         self.coordMap[target_key] = coord
-
-    def export_shapefile(self, f, del_coords_id):
-        filename = self.get_file_path(f)
-        with shapefile.Writer(filename) as _shp:
-            _shp.autoBalance = 1
-            _shp.field('dc_id', 'C', 254)
-            _shp.field('elevation', 'N', 20)
-            _shp.field('pattern', 'C', 254)
-            _shp.field('demand', 'N', 20, 9)
-            _shp.field('demand_pto', 'N', 20, 9)
-            for key in self.coordMap:
-                coord = self.coordMap[key]
-                if "Node" in coord.id:
-                    if coord.id in del_coords_id:
-                        continue
-                    _shp.point(float(coord.lon), float(coord.lat))
-                    _shp.record(coord.id, coord.elevation, coord.pattern, coord.demand, '')
-            _shp.close()
-        self.createProjection(filename)
 
     def add_demands(self, connections):
         for conn in connections:

@@ -1,6 +1,5 @@
 import json
 from shapely.geometry import LineString
-import shapefile
 from epanet.layer_base import LayerBase
 
 
@@ -58,24 +57,20 @@ class Pipes(LayerBase):
                         pipe = Pipes.Pipe(_id, node1, node2, length, pipe_size)
                         self.pipes.append(pipe)
 
-    def export_shapefile(self, f):
-        if len(self.pipes) == 0:
-            return
-        filename = self.get_file_path(f)
-        with shapefile.Writer(filename) as _shp:
-            _shp.autoBalance = 1
-            _shp.field('dc_id', 'C', 254)
-            _shp.field('node1', 'C', 254)
-            _shp.field('node2', 'C', 254)
-            _shp.field('length', 'N', 20, 9)
-            _shp.field('diameter', 'N', 20, 9)
-            _shp.field('status', 'C', 254)
-            _shp.field('roughness', 'N', 20, 9)
-            _shp.field('minorloss', 'N', 20, 9)
+    def updatePipeNode(self, obj):
+        '''
+        To update pipe node which intersects valve or pump node.
+        :param obj: valve object or pump object shall be here
+        :return:
+        '''
+        target_key = ",".join([str(obj.lon), str(obj.lat)])
+        if target_key in self.coords.coordMap and self.coords.coordMap[target_key]:
+            coord = self.coords.coordMap[target_key]
+            nodeid = coord.id
             for pipe in self.pipes:
-                node1 = self.coords.get_coord_by_id(pipe.node1)
-                node2 = self.coords.get_coord_by_id(pipe.node2)
-                _shp.line([[[float(node1.lon), float(node1.lat)], [float(node2.lon), float(node2.lat)]]])
-                _shp.record(pipe.id, pipe.node1, pipe.node2, pipe.length, pipe.diameter, pipe.status, pipe.roughness, pipe.minorloss)
-            _shp.close()
-        self.createProjection(filename)
+                if nodeid == pipe.node1:
+                    pipe.set_node(obj.id, pipe.node2)
+                    coord.id = obj.id
+                elif nodeid == pipe.node2:
+                    pipe.set_node(pipe.node1, obj.id)
+                    coord.id = obj.id
