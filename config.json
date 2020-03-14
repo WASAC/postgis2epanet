@@ -36,7 +36,7 @@
   },
   "reservoirs": {
     "sql": [
-      "SELECT source_type || '-' || watersource_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, source_type, ",
+      "SELECT COALESCE(source_type,'Reservoir') || '-' || watersource_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, source_type, ",
       "st_x(st_transform(geom,%epsg_utm%)) as lon_utm, st_y(st_transform(geom,%epsg_utm%)) as lat_utm ",
       "FROM watersource WHERE wss_id={0}"]
   },
