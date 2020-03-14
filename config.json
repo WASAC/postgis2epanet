@@ -21,18 +21,12 @@
         "(SELECT p.geom AS geom, ST_Value(a.rast, 1, p.geom) AS alt, ST_X(geom) as lon, ST_Y(geom) as lat ",
         " FROM rwanda_dem_10m a RIGHT JOIN points2d p ON ST_Intersects(a.rast, p.geom)), ",
       " points3d AS ",
-        " (SELECT ST_SetSRID(COALESCE(ST_MakePoint(lon, lat, alt), ST_MakePoint(lon, lat)), %epsg%) AS geom, lon, lat, alt FROM cells) ",
-      " SELECT 'Node-' || row_number() over() as id,st_x(geom) as lon, st_y(geom) as lat, st_z(geom)as elevation, ",
-      " st_x(st_transform(geom,%epsg_utm%)) as lon_utm, st_y(st_transform(geom,%epsg_utm%)) as lat_utm ",
-      " FROM points3d WHERE geom is not NULL"
-    ]
-  },
-  "connections" : {
-    "sql" : [
-      "select connection_id as id, connection_type as type, ",
-      "st_x(geom) as lon, st_y(geom) as lat, no_user, ",
-      "COALESCE(cast(no_user as float)*80/86400,0.0) as demands ",
-      "from water_connection WHERE wss_id={0} "
+        " (SELECT ST_SetSRID(COALESCE(ST_MakePoint(lon, lat, alt), ST_MakePoint(lon, lat)), %epsg%) AS geom, lon, lat, alt FROM cells), ",
+      " demands AS ",
+        " (SELECT connection_id, geom, COALESCE(cast(no_user as float)*80/86400,0.0) as demand FROM water_connection WHERE wss_id={0}) ",
+      " SELECT 'Node-' || row_number() over() as id,st_x(x.geom) as lon, st_y(x.geom) as lat, st_z(x.geom)as elevation, ",
+      " st_x(st_transform(x.geom,32736)) as lon_utm, st_y(st_transform(x.geom,32736)) as lat_utm, COALESCE(y.demand, 0.0) as demand ",
+      " FROM points3d x LEFT JOIN demands y ON x.geom && y.geom WHERE x.geom is not NULL"
     ]
   },
   "pipes" : {

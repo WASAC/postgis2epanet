@@ -10,7 +10,10 @@ class Coordinates(LayerBase):
             self.elevation = data["elevation"] or 0
             self.lon_utm = round(data["lon_utm"], 3)
             self.lat_utm = round(data["lat_utm"], 3)
-            self.demand = 0.0
+            if "demand" in data:
+                self.demand = round(data["demand"], 6)
+            else:
+                self.demand = 0.0
             self.pattern = ""
 
     def __init__(self, wss_id, config):
@@ -40,10 +43,3 @@ class Coordinates(LayerBase):
         for key in del_key:
             self.coordMap.pop(key)
         self.coordMap[target_key] = coord
-
-    def add_demands(self, connections):
-        for conn in connections:
-            target_key = ",".join([str(conn.lon), str(conn.lat)])
-            for key in self.coordMap:
-                if key == target_key:
-                    self.coordMap[key].demand = conn.demands

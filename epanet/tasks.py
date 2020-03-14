@@ -11,7 +11,6 @@ from epanet.reservoirs import Reservoirs
 from epanet.tanks import Tanks
 from epanet.pumps import Pumps
 from epanet.valves import Valves
-from epanet.connections import Connections
 from format.inp import InpJunctions, InpPipes, InpPumps, InpCurve, InpReservoirs, InpTanks, InpValves, InpCoordinates, InpTitle, InpTags, InpOptions, InpEnd
 from format.shp import ShpTanks, ShpReservoirs, ShpCoordinates, ShpPipes, ShpPumps, ShpValves
 
@@ -71,10 +70,6 @@ class Tasks(object):
             with open(self.export_file, 'a', encoding='UTF-8') as f:
                 coords = Coordinates(self.wss_id, self.config)
                 coords.get_data(self.db)
-
-                conns = Connections(self.wss_id, self.config)
-                conns.get_data(self.db)
-                coords.add_demands(conns.connections)
 
                 reservoirs = Reservoirs(self.wss_id, coords, self.config)
                 reservoirs.get_data(self.db)
