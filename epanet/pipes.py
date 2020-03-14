@@ -7,7 +7,7 @@ from epanet.layer_base import LayerBase
 class Pipes(LayerBase):
     class Pipe(object):
         def __init__(self, id, node1, node2, length, diameter):
-            self.id = "Pipe-" + id
+            self.id = id
             self.node1 = node1
             self.node2 = node2
             self.length = round(length, 3)
@@ -55,9 +55,9 @@ class Pipes(LayerBase):
         query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
-            pipe_id = data[0]
-            pipe_size = data[1]
-            geojson = json.loads(data[2])
+            pipe_id = data["id"]
+            pipe_size = data["diameter"]
+            geojson = json.loads(data["geojson"])
             coordinates = geojson['coordinates'][0]
             for i in range(0, len(coordinates) - 1):
 

@@ -1,4 +1,5 @@
 import psycopg2
+from psycopg2.extras import DictCursor
 
 
 class Database(object):
@@ -38,7 +39,7 @@ class Database(object):
         query : str
             SQL for running
         """
-        with self.conn.cursor() as cur:
+        with self.conn.cursor(cursor_factory=DictCursor) as cur:
             # Execute the query
             try:
                 cur.execute(query)

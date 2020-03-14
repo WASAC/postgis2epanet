@@ -5,13 +5,13 @@ from epanet.layer_base import LayerBase
 
 class Tanks(LayerBase):
     class Tank(object):
-        def __init__(self, id, elevation, capacity, lon, lat):
-            self.id = "Tank-" + str(id)
-            self.elevation = elevation or 0
-            self.capacity = capacity or 0
+        def __init__(self, data):
+            self.id = data["id"]
+            self.elevation = data["elevation"] or 0
+            self.capacity = data["capacity"] or 0
             self.max_level = 1.5
-            self.lon = round(lon, 6)
-            self.lat = round(lat, 6)
+            self.lon = round(data["lon"], 6)
+            self.lat = round(data["lat"], 6)
             self.diameter = 5
             self.min_vol = self.capacity
             self.vol_curve = ""
@@ -51,17 +51,9 @@ class Tanks(LayerBase):
         query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
-            id = data[0]
-            lon = data[1]
-            lat = data[2]
-            elevation = data[3]
-            capacity = data[4]
-            lon_utm = data[5]
-            lat_utm = data[6]
-            t = Tanks.Tank(id, elevation, capacity, lon, lat)
+            t = Tanks.Tank(data)
             self.tanks.append(t)
-
-            coord = Coordinates.Coordinate(t.id, t.lon, t.lat, t.elevation, lon_utm, lat_utm)
+            coord = Coordinates.Coordinate(data)
             self.coords.add_coordinate(coord)
 
     def export(self, f):

@@ -5,12 +5,13 @@ from epanet.layer_base import LayerBase
 
 class Reservoirs(LayerBase):
     class Reservoir(object):
-        def __init__(self, id, elevation, srctype, lon, lat):
-            self.id = "{0}-{1}".format(srctype, str(id)).replace(" ", "-")
-            self.elevation = elevation or 0
+        def __init__(self, data):
+            # self.id = "{0}-{1}".format(data["source_type"], str(data["id"])).replace(" ", "-")
+            self.id = data["id"]
+            self.elevation = data["elevation"] or 0
             self.pattern = ""
-            self.lon = round(lon, 6)
-            self.lat = round(lat, 6)
+            self.lon = round(data["lon"], 6)
+            self.lat = round(data["lat"], 6)
 
         @staticmethod
         def create_header(f):
@@ -37,17 +38,9 @@ class Reservoirs(LayerBase):
         query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
-            id = data[0]
-            lon = data[1]
-            lat = data[2]
-            elevation = data[3]
-            srctype = data[4]
-            lon_utm = data[5]
-            lat_utm = data[6]
-            r = Reservoirs.Reservoir(id, elevation, srctype, lon, lat)
+            r = Reservoirs.Reservoir(data)
             self.reservoirs.append(r)
-
-            coord = Coordinates.Coordinate(r.id, r.lon, r.lat, r.elevation, lon_utm, lat_utm)
+            coord = Coordinates.Coordinate(data)
             self.coords.add_coordinate(coord)
 
     def export(self, f):

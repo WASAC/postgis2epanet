@@ -4,15 +4,15 @@ from epanet.layer_base import LayerBase
 
 class Pumps(LayerBase):
     class Pump(object):
-        def __init__(self, id, lon, lat, elevation, flow, head):
-            self.id = "Pump-" + str(id)
-            self.lon = round(lon, 6)
-            self.lat = round(lat, 6)
-            self.curve = Pumps.PumpCurve(id, flow, head)
+        def __init__(self, data):
+            self.id = data["id"]
+            self.lon = round(data["lon"], 6)
+            self.lat = round(data["lat"], 6)
+            self.curve = Pumps.PumpCurve(data)
             self.parameter = "Head " + str(self.curve.id)
             self.node1 = ""
             self.node2 = ""
-            self.elevation = elevation
+            self.elevation = data["elevation"]
 
         def set_node(self, node1, node2):
             self.node1 = node1
@@ -37,10 +37,10 @@ class Pumps(LayerBase):
                                  ))
 
     class PumpCurve(object):
-        def __init__(self, id, flow, head):
-            self.id = "curve_{0}".format(id)
-            self.flow = flow
-            self.head = head
+        def __init__(self, data):
+            self.id = "curve-{0}".format(str(data["id"]))
+            self.flow = data["discharge"]
+            self.head = data["head"]
 
         @staticmethod
         def create_header(f):
@@ -76,13 +76,7 @@ class Pumps(LayerBase):
         query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
-            id = data[0]
-            lon = data[1]
-            lat = data[2]
-            elevation = data[3]
-            head = data[4]
-            discharge = data[5]
-            pump = Pumps.Pump(id, lon, lat, elevation, discharge, head)
+            pump = Pumps.Pump(data)
             self.pumps.append(pump)
 
             target_key = ",".join([str(pump.lon), str(pump.lat)])

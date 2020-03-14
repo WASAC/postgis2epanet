@@ -4,17 +4,17 @@ from epanet.layer_base import LayerBase
 
 class Valves(LayerBase):
     class Valve(object):
-        def __init__(self, id, lon, lat, elevation, diameter, valve_type):
-            self.id = "{0}-{1}".format(valve_type, str(id))
-            self.lon = round(lon, 6)
-            self.lat = round(lat, 6)
-            self.diameter = float(diameter or 0.0)
-            self.valve_type = valve_type
+        def __init__(self, data):
+            self.id = "{0}-{1}".format(data["valve_type"], str(data["id"]))
+            self.lon = round(data["lon"], 6)
+            self.lat = round(data["lat"], 6)
+            self.diameter = float(data["diameter"] or 0.0)
+            self.valve_type = data["valve_type"]
             self.setting = 0
             self.minor_loss = 0.0
             self.node1 = ""
             self.node2 = ""
-            self.elevation = elevation
+            self.elevation = data["elevation"]
 
         def set_node(self, node1, node2):
             self.node1 = node1
@@ -62,13 +62,7 @@ class Valves(LayerBase):
         query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
-            id = data[0]
-            lon = data[1]
-            lat = data[2]
-            elevation = data[3]
-            diamater = data[4]
-            valve_type = data[5]
-            valve = Valves.Valve(id, lon, lat, elevation, diamater, valve_type)
+            valve = Valves.Valve(data)
             self.valves.append(valve)
 
             target_key = ",".join([str(valve.lon), str(valve.lat)])

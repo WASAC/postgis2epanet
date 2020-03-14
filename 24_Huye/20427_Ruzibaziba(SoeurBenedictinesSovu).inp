@@ -1,0 +1,466 @@
+[TITLE]
+20427 Ruzibaziba(SoeurBenedictinesSovu) WSS in Huye District
+
+[JUNCTIONS]
+;ID                  	Elev        	Demand      	Pattern         
+ Node-14             	1718.0      	0.0         	                	;
+ Node-2              	1717.0      	0.0         	                	;
+ Node-3              	1717.0      	0.007407407 	                	;
+ Node-113            	1719.0      	0.0         	                	;
+ Node-5              	1719.0      	0.0         	                	;
+ Node-6              	1717.0      	0.0         	                	;
+ Node-27             	1715.0      	0.0         	                	;
+ Node-8              	1714.0      	0.0         	                	;
+ Node-9              	1714.0      	0.0         	                	;
+ Node-10             	1714.0      	0.002777778 	                	;
+ Node-11             	1721.0      	0.005555556 	                	;
+ Node-12             	1719.0      	0.0         	                	;
+ Node-29             	1718.0      	0.0         	                	;
+ Node-15             	1718.0      	0.0         	                	;
+ Node-16             	1718.0      	0.0         	                	;
+ Node-135            	1718.0      	0.0         	                	;
+ Node-18             	1717.0      	0.0         	                	;
+ Node-134            	1717.0      	0.0         	                	;
+ Node-20             	1718.0      	0.0         	                	;
+ Node-21             	1718.0      	0.0         	                	;
+ Node-22             	1721.0      	0.0         	                	;
+ Node-23             	1723.0      	0.0         	                	;
+ Node-24             	1724.0      	0.0         	                	;
+ Node-25             	1728.0      	0.0         	                	;
+ Node-91             	1730.0      	0.0         	                	;
+ Node-28             	1715.0      	0.003703704 	                	;
+ Node-30             	1718.0      	0.0         	                	;
+ Node-31             	1715.0      	0.0         	                	;
+ Node-32             	1713.0      	0.0         	                	;
+ Node-33             	1711.0      	0.0         	                	;
+ Node-34             	1708.0      	0.0         	                	;
+ Node-35             	1706.0      	0.003703704 	                	;
+ Node-38             	1731.0      	0.0         	                	;
+ Node-39             	1732.0      	0.0         	                	;
+ Node-97             	1734.0      	0.0         	                	;
+ Node-41             	1735.0      	0.0         	                	;
+ Node-42             	1736.0      	0.0         	                	;
+ Node-43             	1737.0      	0.0         	                	;
+ Node-44             	1738.0      	0.0         	                	;
+ Node-45             	1740.0      	0.0         	                	;
+ Node-46             	1740.0      	0.0         	                	;
+ Node-47             	1742.0      	0.0         	                	;
+ Node-48             	1743.0      	0.0         	                	;
+ Node-49             	1744.0      	0.0         	                	;
+ Node-50             	1745.0      	0.0         	                	;
+ Node-51             	1746.0      	0.0         	                	;
+ Node-117            	1748.0      	0.0         	                	;
+ Node-53             	1749.0      	0.0         	                	;
+ Node-54             	1751.0      	0.0         	                	;
+ Node-55             	1752.0      	0.0         	                	;
+ Node-56             	1754.0      	0.0         	                	;
+ Node-57             	1754.0      	0.0         	                	;
+ Node-58             	1754.0      	0.0         	                	;
+ Node-59             	1754.0      	0.0         	                	;
+ Node-60             	1754.0      	0.0         	                	;
+ Node-61             	1759.0      	0.0         	                	;
+ Node-62             	1760.0      	0.0         	                	;
+ Node-63             	1761.0      	0.0         	                	;
+ Node-64             	1759.0      	0.0         	                	;
+ Node-65             	1759.0      	0.0         	                	;
+ Node-66             	1761.0      	0.0         	                	;
+ Node-67             	1765.0      	0.0         	                	;
+ Node-68             	1762.0      	0.0         	                	;
+ Node-69             	1767.0      	0.0         	                	;
+ Node-70             	1769.0      	0.0         	                	;
+ Node-71             	1770.0      	0.0         	                	;
+ Node-115            	1769.0      	0.0         	                	;
+ Node-73             	1770.0      	0.0         	                	;
+ Node-74             	1770.0      	0.0         	                	;
+ Node-75             	1770.0      	0.0         	                	;
+ Node-76             	1770.0      	0.0         	                	;
+ Node-77             	1769.0      	0.0         	                	;
+ Node-78             	1769.0      	0.0         	                	;
+ Node-79             	1769.0      	0.0         	                	;
+ Node-80             	1770.0      	0.0         	                	;
+ Node-81             	1769.0      	0.0         	                	;
+ Node-82             	1770.0      	0.0         	                	;
+ Node-83             	1772.0      	0.0         	                	;
+ Node-84             	1774.0      	0.0         	                	;
+ Node-85             	1778.0      	0.0         	                	;
+ Node-86             	1782.0      	0.0         	                	;
+ Node-87             	1783.0      	0.0         	                	;
+ Node-88             	1786.0      	0.0         	                	;
+ Node-89             	1781.0      	0.0         	                	;
+ Node-90             	1729.0      	0.37037037  	                	;
+ Node-98             	1731.0      	0.0         	                	;
+ Node-93             	1733.0      	0.0         	                	;
+ Node-94             	1736.0      	0.0         	                	;
+ Node-95             	1736.0      	0.0         	                	;
+ Node-96             	1734.0      	0.0         	                	;
+ Node-99             	1730.0      	0.0         	                	;
+ Node-100            	1729.0      	0.007407407 	                	;
+ Node-102            	1727.0      	0.0         	                	;
+ Node-103            	1724.0      	0.0         	                	;
+ Node-104            	1721.0      	0.023148148 	                	;
+ Node-108            	1727.0      	0.0         	                	;
+ Node-107            	1724.0      	0.009259259 	                	;
+ Node-109            	1725.0      	0.0         	                	;
+ Node-112            	1724.0      	0.0         	                	;
+ Node-111            	1720.0      	0.324074074 	                	;
+ Node-114            	1715.0      	0.0         	                	;
+ Node-116            	1768.0      	0.0         	                	;
+ Node-118            	1746.0      	0.001851852 	                	;
+ Node-119            	1780.0      	0.0         	                	;
+ Node-120            	1780.0      	0.0         	                	;
+ Node-121            	1781.0      	0.0         	                	;
+ Node-122            	1781.0      	0.0         	                	;
+ Node-123            	1782.0      	0.0         	                	;
+ Node-126            	1785.0      	0.0         	                	;
+ Node-127            	1784.0      	0.0         	                	;
+ Node-128            	1781.0      	0.0         	                	;
+ Node-129            	1781.0      	0.0         	                	;
+ Node-130            	1784.0      	0.0         	                	;
+ Node-132            	1716.0      	0.00462963  	                	;
+ Node-133            	1716.0      	0.0         	                	;
+ Node-136            	1717.0      	0.0         	                	;
+ Node-137            	1716.0      	0.005555556 	                	;
+
+[RESERVOIRS]
+;ID                  	Head        	Pattern         
+ Spring-5361         	1785        	                	;
+ Spring-5368         	1785        	                	;
+
+[TANKS]
+;ID                  	Elevation   	InitLevel   	MinLevel    	MaxLevel    	Diameter    	MinVol      	VolCurve
+ Tank-19010          	1729        	0.75        	0.15000000000000002     	1.5         	5           	30.0        	                	;
+
+[PIPES]
+;ID                  	Node1               	Node2               	Length      	Diameter    	Roughness   	MinorLoss   	Status
+ Pipe-110117-0       	Node-14             	Node-2              	9.336       	25          	100         	0           	Open  	;
+ Pipe-110117-1       	Node-2              	Node-3              	7.956       	25          	100         	0           	Open  	;
+ Pipe-110118-0       	Node-113            	Node-5              	4.96        	25          	100         	0           	Open  	;
+ Pipe-110118-1       	Node-5              	Node-6              	18.766      	25          	100         	0           	Open  	;
+ Pipe-110118-2       	Node-6              	Node-27             	16.167      	25          	100         	0           	Open  	;
+ Pipe-110118-3       	Node-27             	Node-8              	12.694      	25          	100         	0           	Open  	;
+ Pipe-110118-4       	Node-8              	Node-9              	5.698       	25          	100         	0           	Open  	;
+ Pipe-110118-5       	Node-9              	Node-10             	5.939       	25          	100         	0           	Open  	;
+ Pipe-110114-0       	Node-11             	Node-12             	10.86       	25          	100         	0           	Open  	;
+ Pipe-110114-1       	Node-12             	Node-29             	6.817       	25          	100         	0           	Open  	;
+ Pipe-110114-2       	Node-29             	Node-14             	7.465       	25          	100         	0           	Open  	;
+ Pipe-110114-3       	Node-14             	Node-15             	9.172       	25          	100         	0           	Open  	;
+ Pipe-110114-4       	Node-15             	Node-16             	16.335      	25          	100         	0           	Open  	;
+ Pipe-110114-5       	Node-16             	Node-135            	14.068      	25          	100         	0           	Open  	;
+ Pipe-110114-6       	Node-135            	Node-18             	11.503      	25          	100         	0           	Open  	;
+ Pipe-110114-7       	Node-18             	Node-134            	11.393      	25          	100         	0           	Open  	;
+ Pipe-110114-8       	Node-134            	Node-20             	7.036       	25          	100         	0           	Open  	;
+ Pipe-110114-9       	Node-20             	Node-21             	5.59        	25          	100         	0           	Open  	;
+ Pipe-110114-10      	Node-21             	Node-22             	18.44       	25          	100         	0           	Open  	;
+ Pipe-110114-11      	Node-22             	Node-23             	15.514      	25          	100         	0           	Open  	;
+ Pipe-110114-12      	Node-23             	Node-24             	16.658      	25          	100         	0           	Open  	;
+ Pipe-110114-13      	Node-24             	Node-25             	18.027      	25          	100         	0           	Open  	;
+ Pipe-110114-14      	Node-25             	Node-91             	14.923      	25          	100         	0           	Open  	;
+ Pipe-110119-0       	Node-27             	Node-28             	11.311      	25          	100         	0           	Open  	;
+ Pipe-110110-0       	Node-29             	Node-30             	8.6         	25          	100         	0           	Open  	;
+ Pipe-110110-1       	Node-30             	Node-31             	25.856      	25          	100         	0           	Open  	;
+ Pipe-110110-2       	Node-31             	Node-32             	22.293      	25          	100         	0           	Open  	;
+ Pipe-110110-3       	Node-32             	Node-33             	19.405      	25          	100         	0           	Open  	;
+ Pipe-110110-4       	Node-33             	Node-34             	18.646      	25          	100         	0           	Open  	;
+ Pipe-110110-5       	Node-34             	Node-35             	14.728      	25          	100         	0           	Open  	;
+ Pipe-110111-0       	Tank-19010          	Node-38             	34.624      	50          	100         	0           	Open  	;
+ Pipe-110112-0       	Node-38             	Node-39             	33.541      	40          	100         	0           	Open  	;
+ Pipe-110112-1       	Node-39             	Node-97             	42.662      	40          	100         	0           	Open  	;
+ Pipe-110112-2       	Node-97             	Node-41             	29.044      	40          	100         	0           	Open  	;
+ Pipe-110112-3       	Node-41             	Node-42             	33.081      	40          	100         	0           	Open  	;
+ Pipe-110112-4       	Node-42             	Node-43             	33.987      	40          	100         	0           	Open  	;
+ Pipe-110112-5       	Node-43             	Node-44             	51.745      	40          	100         	0           	Open  	;
+ Pipe-110112-6       	Node-44             	Node-45             	49.108      	40          	100         	0           	Open  	;
+ Pipe-110112-7       	Node-45             	Node-46             	70.789      	40          	100         	0           	Open  	;
+ Pipe-110112-8       	Node-46             	Node-47             	64.472      	40          	100         	0           	Open  	;
+ Pipe-110112-9       	Node-47             	Node-48             	73.734      	40          	100         	0           	Open  	;
+ Pipe-110112-10      	Node-48             	Node-49             	64.293      	40          	100         	0           	Open  	;
+ Pipe-110112-11      	Node-49             	Node-50             	79.376      	40          	100         	0           	Open  	;
+ Pipe-110112-12      	Node-50             	Node-51             	74.411      	40          	100         	0           	Open  	;
+ Pipe-110112-13      	Node-51             	Node-117            	97.077      	40          	100         	0           	Open  	;
+ Pipe-110112-14      	Node-117            	Node-53             	81.458      	40          	100         	0           	Open  	;
+ Pipe-110112-15      	Node-53             	Node-54             	74.488      	40          	100         	0           	Open  	;
+ Pipe-110112-16      	Node-54             	Node-55             	56.408      	40          	100         	0           	Open  	;
+ Pipe-110112-17      	Node-55             	Node-56             	59.671      	40          	100         	0           	Open  	;
+ Pipe-110112-18      	Node-56             	Node-57             	105.944     	40          	100         	0           	Open  	;
+ Pipe-110112-19      	Node-57             	Node-58             	63.853      	40          	100         	0           	Open  	;
+ Pipe-110112-20      	Node-58             	Node-59             	55.262      	40          	100         	0           	Open  	;
+ Pipe-110112-21      	Node-59             	Node-60             	51.22       	40          	100         	0           	Open  	;
+ Pipe-110112-22      	Node-60             	Node-61             	51.615      	40          	100         	0           	Open  	;
+ Pipe-110112-23      	Node-61             	Node-62             	55.251      	40          	100         	0           	Open  	;
+ Pipe-110112-24      	Node-62             	Node-63             	44.99       	40          	100         	0           	Open  	;
+ Pipe-110112-25      	Node-63             	Node-64             	43.707      	40          	100         	0           	Open  	;
+ Pipe-110112-26      	Node-64             	Node-65             	25.594      	40          	100         	0           	Open  	;
+ Pipe-110112-27      	Node-65             	Node-66             	33.771      	40          	100         	0           	Open  	;
+ Pipe-110112-28      	Node-66             	Node-67             	37.213      	40          	100         	0           	Open  	;
+ Pipe-110112-29      	Node-67             	Node-68             	30.772      	40          	100         	0           	Open  	;
+ Pipe-110112-30      	Node-68             	Node-69             	60.156      	40          	100         	0           	Open  	;
+ Pipe-110112-31      	Node-69             	Node-70             	53.923      	40          	100         	0           	Open  	;
+ Pipe-110112-32      	Node-70             	Node-71             	47.96       	40          	100         	0           	Open  	;
+ Pipe-110112-33      	Node-71             	Node-115            	82.603      	40          	100         	0           	Open  	;
+ Pipe-110112-34      	Node-115            	Node-73             	44.93       	40          	100         	0           	Open  	;
+ Pipe-110112-35      	Node-73             	Node-74             	48.549      	40          	100         	0           	Open  	;
+ Pipe-110112-36      	Node-74             	Node-75             	57.657      	40          	100         	0           	Open  	;
+ Pipe-110112-37      	Node-75             	Node-76             	56.41       	40          	100         	0           	Open  	;
+ Pipe-110112-38      	Node-76             	Node-77             	60.094      	40          	100         	0           	Open  	;
+ Pipe-110112-39      	Node-77             	Node-78             	66.294      	40          	100         	0           	Open  	;
+ Pipe-110112-40      	Node-78             	Node-79             	62.039      	40          	100         	0           	Open  	;
+ Pipe-110112-41      	Node-79             	Node-80             	56.067      	40          	100         	0           	Open  	;
+ Pipe-110112-42      	Node-80             	Node-81             	48.605      	40          	100         	0           	Open  	;
+ Pipe-110112-43      	Node-81             	Node-82             	50.092      	40          	100         	0           	Open  	;
+ Pipe-110112-44      	Node-82             	Node-83             	65.395      	40          	100         	0           	Open  	;
+ Pipe-110112-45      	Node-83             	Node-84             	59.428      	40          	100         	0           	Open  	;
+ Pipe-110112-46      	Node-84             	Node-85             	57.201      	40          	100         	0           	Open  	;
+ Pipe-110112-47      	Node-85             	Node-86             	60.61       	40          	100         	0           	Open  	;
+ Pipe-110112-48      	Node-86             	Node-87             	48.491      	40          	100         	0           	Open  	;
+ Pipe-110112-49      	Node-87             	Node-88             	44.359      	40          	100         	0           	Open  	;
+ Pipe-110112-50      	Node-88             	Node-89             	35.151      	40          	100         	0           	Open  	;
+ Pipe-110112-51      	Node-89             	Node-119            	27.917      	40          	100         	0           	Open  	;
+ Pipe-110112-52      	Node-119            	Node-120            	21.851      	40          	100         	0           	Open  	;
+ Pipe-110112-53      	Node-120            	Node-121            	20.524      	40          	100         	0           	Open  	;
+ Pipe-110112-54      	Node-121            	Node-122            	18.471      	40          	100         	0           	Open  	;
+ Pipe-110112-55      	Node-122            	Node-123            	14.762      	40          	100         	0           	Open  	;
+ Pipe-110112-56      	Node-123            	Node-126            	12.146      	40          	100         	0           	Open  	;
+ Pipe-110112-57      	Node-126            	Spring-5368         	2.549       	40          	100         	0           	Open  	;
+ Pipe-110113-0       	Node-126            	Node-127            	13.03       	40          	100         	0           	Open  	;
+ Pipe-110113-1       	Node-127            	Node-128            	23.533      	40          	100         	0           	Open  	;
+ Pipe-110113-2       	Node-128            	Node-129            	19.877      	40          	100         	0           	Open  	;
+ Pipe-110113-3       	Node-129            	Node-130            	19.385      	40          	100         	0           	Open  	;
+ Pipe-110113-4       	Node-130            	Spring-5361         	6.46        	40          	100         	0           	Open  	;
+ Pipe-110115-0       	Node-132            	Node-133            	9.519       	25          	100         	0           	Open  	;
+ Pipe-110115-1       	Node-133            	Node-134            	13.679      	25          	100         	0           	Open  	;
+ Pipe-110116-0       	Node-135            	Node-136            	10.731      	25          	100         	0           	Open  	;
+ Pipe-110116-1       	Node-136            	Node-137            	13.34       	25          	100         	0           	Open  	;
+ Pipe-110120-0       	Node-90             	Node-91             	3.171       	25          	100         	0           	Open  	;
+ Pipe-110120-1       	Node-91             	Node-98             	23.609      	25          	100         	0           	Open  	;
+ Pipe-110120-2       	Node-98             	Node-93             	29.657      	25          	100         	0           	Open  	;
+ Pipe-110120-3       	Node-93             	Node-94             	36.149      	25          	100         	0           	Open  	;
+ Pipe-110120-4       	Node-94             	Node-95             	41.452      	25          	100         	0           	Open  	;
+ Pipe-110120-5       	Node-95             	Node-96             	31.957      	25          	100         	0           	Open  	;
+ Pipe-110120-6       	Node-96             	Node-97             	19.916      	25          	100         	0           	Open  	;
+ Pipe-110121-0       	Node-98             	Node-99             	17.446      	25          	100         	0           	Open  	;
+ Pipe-110121-1       	Node-99             	Node-100            	13.244      	25          	100         	0           	Open  	;
+ Pipe-110122-0       	Tank-19010          	Node-102            	15.463      	40          	100         	0           	Open  	;
+ Pipe-110122-1       	Node-102            	Node-103            	22.582      	40          	100         	0           	Open  	;
+ Pipe-110122-2       	Node-103            	Node-104            	14.985      	40          	100         	0           	Open  	;
+ Pipe-110123-0       	Tank-19010          	Node-108            	20.208      	40          	100         	0           	Open  	;
+ Pipe-110123-1       	Node-108            	Node-107            	33.153      	40          	100         	0           	Open  	;
+ Pipe-110124-0       	Node-108            	Node-109            	39.673      	25          	100         	0           	Open  	;
+ Pipe-110124-1       	Node-109            	Node-112            	44.189      	25          	100         	0           	Open  	;
+ Pipe-110124-2       	Node-112            	Node-111            	27.811      	25          	100         	0           	Open  	;
+ Pipe-110125-0       	Node-112            	Node-113            	41.237      	25          	100         	0           	Open  	;
+ Pipe-110125-1       	Node-113            	Node-114            	31.616      	25          	100         	0           	Open  	;
+ Pipe-110126-0       	Node-115            	Node-116            	28.702      	25          	100         	0           	Open  	;
+ Pipe-110127-0       	Node-117            	Node-118            	27.369      	25          	100         	0           	Open  	;
+
+[PUMPS]
+;ID                  	Node1               	Node2               	Parameters  
+
+[VALVES]
+;ID                  	Node1           	Node2           	Diameter    	Type        	Setting     	MinorLoss   
+
+[TAGS]
+
+[DEMANDS]
+;Junction        	Demand      	Pattern         	Category
+
+[STATUS]
+;ID              	Status/Setting
+
+[PATTERNS]
+;ID              	Multipliers
+
+[CURVES]
+;ID              	X-Value     	Y-Value     
+
+[CONTROLS]
+
+[RULES]
+
+[ENERGY]
+ Global Efficiency  	75
+ Global Price       	0
+ Demand Charge      	0
+
+[EMITTERS]
+;Junction        	Coefficient
+
+[QUALITY]
+;Node            	InitQual
+
+[SOURCES]
+;Node            	Type        	Quality     	Pattern
+
+[REACTIONS]
+;Type     	Pipe/Tank       	Coefficient
+
+
+[REACTIONS]
+ Order Bulk            	1
+ Order Tank            	1
+ Order Wall            	1
+ Global Bulk           	0
+ Global Wall           	0
+ Limiting Potential    	0
+ Roughness Correlation 	0
+
+[MIXING]
+;Tank            	Model
+
+[TIMES]
+ Duration           	0
+ Hydraulic Timestep 	1:00
+ Quality Timestep   	0:05
+ Pattern Timestep   	1:00
+ Pattern Start      	0:00
+ Report Timestep    	1:00
+ Report Start       	0:00
+ Start ClockTime    	12 am
+ Statistic          	None
+
+[REPORT]
+ Status             	No
+ Summary            	No
+ Page               	0
+
+[OPTIONS]
+ Units              	LPS
+ Headloss           	H-W
+ Specific Gravity   	1
+ Viscosity          	1
+ Trials             	40
+ Accuracy           	0.001
+ CHECKFREQ          	2
+ MAXCHECK           	10
+ DAMPLIMIT          	0
+ Unbalanced         	Continue 10
+ Pattern            	0
+ Demand Multiplier  	1.0
+ Emitter Exponent   	0.5
+ Quality            	None mg/L
+ Diffusivity        	1
+ Tolerance          	0.01
+
+[COORDINATES]
+;Node                	X-Coord         	Y-Coord         
+ Node-14             	29.719436       	-2.564749       
+ Node-2              	29.719486       	-2.564816       
+ Node-3              	29.719532       	-2.564871       
+ Node-113            	29.720189       	-2.563938       
+ Node-5              	29.720145       	-2.563945       
+ Node-6              	29.720188       	-2.564109       
+ Node-27             	29.720232       	-2.564248       
+ Node-8              	29.720276       	-2.564354       
+ Node-9              	29.720241       	-2.564392       
+ Node-10             	29.720196       	-2.56442        
+ Node-11             	29.719284       	-2.564676       
+ Node-12             	29.719347       	-2.564751       
+ Node-29             	29.719389       	-2.564796       
+ Node-15             	29.71949        	-2.564686       
+ Node-16             	29.719595       	-2.564584       
+ Node-135            	29.719684       	-2.564493       
+ Node-18             	29.719758       	-2.564421       
+ Node-134            	29.719833       	-2.564351       
+ Node-20             	29.719871       	-2.5643         
+ Node-21             	29.719887       	-2.564252       
+ Node-22             	29.719826       	-2.564097       
+ Node-23             	29.71977        	-2.563968       
+ Node-24             	29.719694       	-2.563839       
+ Node-25             	29.719606       	-2.563702       
+ Node-91             	29.719524       	-2.563596       
+ Node-28             	29.720144       	-2.564299       
+ Node-30             	29.719338       	-2.564855       
+ Node-31             	29.719486       	-2.565034       
+ Node-32             	29.719614       	-2.565189       
+ Node-33             	29.719725       	-2.565324       
+ Node-34             	29.719826       	-2.565458       
+ Node-35             	29.719909       	-2.565562       
+ Node-38             	29.719525       	-2.562489       
+ Node-39             	29.719294       	-2.562294       
+ Node-97             	29.719          	-2.562046       
+ Node-41             	29.718801       	-2.561878       
+ Node-42             	29.718568       	-2.561692       
+ Node-43             	29.71833        	-2.5615         
+ Node-44             	29.71794        	-2.561245       
+ Node-45             	29.717565       	-2.561012       
+ Node-46             	29.717025       	-2.560675       
+ Node-47             	29.716528       	-2.560375       
+ Node-48             	29.715957       	-2.560038       
+ Node-49             	29.715456       	-2.55975        
+ Node-50             	29.71484        	-2.559389       
+ Node-51             	29.714253       	-2.559068       
+ Node-117            	29.713476       	-2.558671       
+ Node-53             	29.712815       	-2.558355       
+ Node-54             	29.712204       	-2.558081       
+ Node-55             	29.711731       	-2.557898       
+ Node-56             	29.711212       	-2.557762       
+ Node-57             	29.710272       	-2.557615       
+ Node-58             	29.709703       	-2.557546       
+ Node-59             	29.709209       	-2.557504       
+ Node-60             	29.70875        	-2.55747        
+ Node-61             	29.708287       	-2.557437       
+ Node-62             	29.707793       	-2.557395       
+ Node-63             	29.707395       	-2.557326       
+ Node-64             	29.707013       	-2.557234       
+ Node-65             	29.706802       	-2.557143       
+ Node-66             	29.706527       	-2.557014       
+ Node-67             	29.706221       	-2.55688        
+ Node-68             	29.705969       	-2.556765       
+ Node-69             	29.705487       	-2.556519       
+ Node-70             	29.705057       	-2.556296       
+ Node-71             	29.704691       	-2.556068       
+ Node-115            	29.704076       	-2.555649       
+ Node-73             	29.703728       	-2.555445       
+ Node-74             	29.703347       	-2.555232       
+ Node-75             	29.702904       	-2.554961       
+ Node-76             	29.702472       	-2.554696       
+ Node-77             	29.702019       	-2.554401       
+ Node-78             	29.701514       	-2.554084       
+ Node-79             	29.70101        	-2.553845       
+ Node-80             	29.700549       	-2.553642       
+ Node-81             	29.700135       	-2.553502       
+ Node-82             	29.699691       	-2.553427       
+ Node-83             	29.699104       	-2.553415       
+ Node-84             	29.698581       	-2.553522       
+ Node-85             	29.698124       	-2.553757       
+ Node-86             	29.697675       	-2.554066       
+ Node-87             	29.69732        	-2.55432        
+ Node-88             	29.696982       	-2.554533       
+ Node-89             	29.696709       	-2.554693       
+ Node-90             	29.71951        	-2.563621       
+ Node-98             	29.719412       	-2.563415       
+ Node-93             	29.719302       	-2.563171       
+ Node-94             	29.719179       	-2.562869       
+ Node-95             	29.719081       	-2.562508       
+ Node-96             	29.719024       	-2.562225       
+ Node-99             	29.719566       	-2.563389       
+ Node-100            	29.719677       	-2.563432       
+ Node-102            	29.719885       	-2.562691       
+ Node-103            	29.720085       	-2.562655       
+ Node-104            	29.720211       	-2.562607       
+ Node-108            	29.71984        	-2.562864       
+ Node-107            	29.720137       	-2.562845       
+ Node-109            	29.719966       	-2.563199       
+ Node-112            	29.720082       	-2.563581       
+ Node-111            	29.720272       	-2.563744       
+ Node-114            	29.720303       	-2.564199       
+ Node-116            	29.704217       	-2.555432       
+ Node-118            	29.713652       	-2.558498       
+ Node-119            	29.696482       	-2.554799       
+ Node-120            	29.696298       	-2.554867       
+ Node-121            	29.696118       	-2.554909       
+ Node-122            	29.695953       	-2.554924       
+ Node-123            	29.695821       	-2.554927       
+ Node-126            	29.695712       	-2.554925       
+ Node-127            	29.695643       	-2.55483        
+ Node-128            	29.695522       	-2.554655       
+ Node-129            	29.695433       	-2.554499       
+ Node-130            	29.695356       	-2.554342       
+ Node-132            	29.719851       	-2.564506       
+ Node-133            	29.719912       	-2.564446       
+ Node-136            	29.719744       	-2.564569       
+ Node-137            	29.719663       	-2.564658       
+ Spring-5361         	29.695353       	-2.554284       
+ Spring-5368         	29.695693       	-2.554939       
+ Tank-19010          	29.719747       	-2.562707       
+
+[END]

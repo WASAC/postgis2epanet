@@ -1,9 +1,9 @@
 class Districts(object):
     class District(object):
-        def __init__(self, params):
-            self.dist_id = params[0]
-            self.district = params[1]
-            self.wss_id_list = params[2]
+        def __init__(self, data):
+            self.dist_id = data["dist_id"]
+            self.district = data["district"]
+            self.wss_id_list = data["wss_id_list"]
 
     def __init__(self, dist_id_list):
         self.dist_id_list = dist_id_list

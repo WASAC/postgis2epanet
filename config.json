@@ -22,14 +22,14 @@
         " FROM rwanda_dem_10m a RIGHT JOIN points2d p ON ST_Intersects(a.rast, p.geom)), ",
       " points3d AS ",
         " (SELECT ST_SetSRID(COALESCE(ST_MakePoint(lon, lat, alt), ST_MakePoint(lon, lat)), %epsg%) AS geom, lon, lat, alt FROM cells) ",
-      " SELECT row_number() over() as id,st_x(geom) as lon, st_y(geom) as lat, st_z(geom)as alt, ",
+      " SELECT 'Node-' || row_number() over() as id,st_x(geom) as lon, st_y(geom) as lat, st_z(geom)as elevation, ",
       " st_x(st_transform(geom,%epsg_utm%)) as lon_utm, st_y(st_transform(geom,%epsg_utm%)) as lat_utm ",
       " FROM points3d WHERE geom is not NULL"
     ]
   },
   "connections" : {
     "sql" : [
-      "select connection_id, connection_type, ",
+      "select connection_id as id, connection_type as type, ",
       "st_x(geom) as lon, st_y(geom) as lat, no_user, ",
       "COALESCE(cast(no_user as float)*80/86400,0.0) as demands ",
       "from water_connection WHERE wss_id={0} "
@@ -37,25 +37,25 @@
   },
   "pipes" : {
     "sql" : [
-      "SELECT pipe_id, pipe_size, ST_AsGeoJSON(st_multi(geom)) as geojson FROM pipeline WHERE wss_id={0}"
+      "SELECT 'Pipe-' || pipe_id as id, pipe_size as diameter, ST_AsGeoJSON(st_multi(geom)) as geojson FROM pipeline WHERE wss_id={0}"
     ]
   },
   "reservoirs": {
     "sql": [
-      "SELECT watersource_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, source_type, ",
+      "SELECT source_type || '-' || watersource_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, source_type, ",
       "st_x(st_transform(geom,%epsg_utm%)) as lon_utm, st_y(st_transform(geom,%epsg_utm%)) as lat_utm ",
       "FROM watersource WHERE wss_id={0}"]
   },
   "tanks": {
     "sql" : [
-      "SELECT reservoir_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, capacity, ",
+      "SELECT 'Tank-' || reservoir_id as id, st_x(geom) as lon, st_y(geom) as lat, elevation, capacity, ",
       "st_x(st_transform(geom,%epsg_utm%)) as lon_utm, st_y(st_transform(geom,%epsg_utm%)) as lat_utm ",
       "FROM reservoir WHERE wss_id={0}"
     ]
   },
   "valves" : {
     "sql" : [
-      "SELECT a.chamber_id, st_x(a.geom) as lon, st_y(a.geom) as lat, ",
+      "SELECT a.chamber_id as id, st_x(a.geom) as lon, st_y(a.geom) as lat, ",
       "a.elevation, max(b.pipe_size) as diameter, ",
       "case a.chamber_type when 'Valve chamber' then 'TCV' when 'PRV chamber' then 'PRV' END as valve_type ",
       "FROM chamber a INNER JOIN pipeline b ON st_intersects(a.geom, b.geom) ",
@@ -65,8 +65,8 @@
   },
   "pumps" : {
     "sql" : [
-      "SELECT pumpingstation_id as id, st_x(geom) as lon, st_y(geom) as lat, ",
-      "elevation, head_pump, discharge_pump ",
+      "SELECT 'Pump-' || pumpingstation_id as id, st_x(geom) as lon, st_y(geom) as lat, ",
+      "elevation, head_pump as head, discharge_pump as discharge ",
       "FROM pumping_station WHERE wss_id={0}"
     ]
   }

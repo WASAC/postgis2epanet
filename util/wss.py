@@ -1,11 +1,11 @@
 class WaterSupplySystems(object):
     class Wss(object):
         def __init__(self, params):
-            self.wss_id = params[0]
-            self.wss_name = params[1]
-            self.dist_id = params[2]
-            self.wss_type = params[3]
-            self.status = params[4]
+            self.wss_id = params["wss_id"]
+            self.wss_name = params["wss_name"]
+            self.dist_id = params["dist_id"]
+            self.wss_type = params["wss_type"]
+            self.status = params["status"]
 
     def __init__(self, config):
         self.config = config

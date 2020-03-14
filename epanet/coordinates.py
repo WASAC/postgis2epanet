@@ -4,13 +4,13 @@ from epanet.layer_base import LayerBase
 
 class Coordinates(LayerBase):
     class Coordinate(object):
-        def __init__(self, id, lon, lat, altitude, lon_utm, lat_utm):
-            self.id = id
-            self.lon = round(lon, 6)
-            self.lat = round(lat, 6)
-            self.altitude = altitude or 0
-            self.lon_utm = round(lon_utm, 3)
-            self.lat_utm = round(lat_utm, 3)
+        def __init__(self, data):
+            self.id = data["id"]
+            self.lon = round(data["lon"], 6)
+            self.lat = round(data["lat"], 6)
+            self.altitude = data["elevation"] or 0
+            self.lon_utm = round(data["lon_utm"], 3)
+            self.lat_utm = round(data["lat_utm"], 3)
             self.demand = 0.0
             self.pattern = ""
 
@@ -58,7 +58,7 @@ class Coordinates(LayerBase):
         query = self.get_sql().format(str(self.wss_id))
         result = db.execute(query)
         for data in result:
-            coord = Coordinates.Coordinate("Node-" + str(data[0]), data[1], data[2], data[3], data[4], data[5])
+            coord = Coordinates.Coordinate(data)
             key = ",".join([str(coord.lon), str(coord.lat)])
             self.coordMap[key] = coord
 
