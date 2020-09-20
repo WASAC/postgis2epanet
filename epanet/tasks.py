@@ -19,7 +19,7 @@ class Tasks(object):
         self.db = Database(args)
         districts_obj = Districts(args.dist_id)
         self.districts = districts_obj.get_wss_list_each_district(self.db)
-        self.main_dir = datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + "_epanet_data"
+        self.main_dir = args.output + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + "_epanet_data"
         self.exportdir_list = []
         wss_list_obj = WaterSupplySystems()
         if args.elevation == True:

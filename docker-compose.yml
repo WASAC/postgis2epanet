@@ -1,0 +1,15 @@
+version: '2'
+services:
+  python:
+    image: wasac/postgis2epanet:v2.0.0
+    # build: .
+    environment:
+     - db_user=postgres
+     - db_password=wasacgis
+     - db_host=host.docker.internal
+     - db_port=5432
+     - database=rwss_assets
+     # If you want to specify districts to be exported, please put here like "51,52,53"
+     - districts=
+    volumes:
+      - ./data:/tmp/src/data

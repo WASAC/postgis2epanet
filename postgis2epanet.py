@@ -42,6 +42,9 @@ def create_argument_parser():
                         default=False,
                         help="If you use this option, the script is going to update elevation field of all layers.")
 
+    parser.add_argument("-o", "--output", default="./data/", type=str,
+                        help="Output directory. Default is to export under data directory")
+
     return parser.parse_args()
 
 

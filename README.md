@@ -1,4 +1,7 @@
 # PostGIS2EPANET
+![GitHub](https://img.shields.io/github/license/wasac/postgis2epanet)
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/wasac/postgis2epanet)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/wasac/postgis2epanet)
 
 ## postgis2epanet.py
 
@@ -49,6 +52,28 @@ If you want to update elevation from DEM file, use ````-e```` parameter to updat
 ````
 python postgis2epanet.py -e
 ````
+
+## Using Docker
+Firstly, please configure `docker-compose.yml`.
+```yaml
+     - db_user=postgres
+     - db_password={your password}
+     - db_host=host.docker.internal
+     - db_port=5432
+     - database=rwss_assets
+     # If you want to specify districts to be exported, please put here like "51,52,53"
+     - districts=
+```
+
+Just execute the below command.
+```
+docker-compose up
+```
+
+If you changed any source code, please do the below.
+```
+docker-compose up --build
+```
 
 ***
 ## Result of the Script:
