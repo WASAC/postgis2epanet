@@ -41,8 +41,8 @@ class Coordinates(LayerBase):
         def add_coordinate(self, f):
             f.writelines(" {0}\t{1}\t{2}\n"
                          .format("{0}\t".format(self.id).expandtabs(20),
-                                 "{0}\t".format(self.lon).expandtabs(16),
-                                 "{0}\t".format(self.lat).expandtabs(16)))
+                                 "{0}\t".format(self.lon_utm).expandtabs(16),
+                                 "{0}\t".format(self.lat_utm).expandtabs(16)))
 
     def __init__(self, wss_id):
         super().__init__("junctions", wss_id)
