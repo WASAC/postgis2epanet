@@ -14,7 +14,7 @@ class Connections(object):
 
     def get_data(self, db):
         query = " select connection_id, connection_type, st_x(geom) as lon, st_y(geom) as lat, " \
-                "no_user, COALESCE(cast(no_user as float)*80/86400,0.0) as demands " \
+                "no_user, COALESCE(cast(no_user as float)*40/86400,0.0) as demands " \
                 "from water_connection WHERE wss_id={0} ".format(str(self.wss_id))
 
         result = db.execute(query)
