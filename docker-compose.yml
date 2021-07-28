@@ -1,7 +1,7 @@
 version: '2'
 services:
   python:
-    image: wasac/postgis2epanet:v2.0.1
+    image: wasac/postgis2epanet:v2.0.2
     # build: .
     environment:
      - db_user=postgres
